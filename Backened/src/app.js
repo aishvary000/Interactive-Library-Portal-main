@@ -84,7 +84,7 @@ app.post("/login", async (req, res) => {try {const { email, password } = req.bod
  const isMatch = await bcrypt.compare(password, user.Password);
  if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
  const token = jwt.sign({ id: user._id },SECRET);
- //console.log("Clear")
+console.log("Clear")
  return <Redirect to ='/'></Redirect>
  res.sendFile(path.join(__dirname+"../../index.html"));} 
  catch (err) {res.status(500).json({ error: err.message });}});
