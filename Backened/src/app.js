@@ -11,7 +11,8 @@ require("./db/conn")
 
 
 const app = express()
-const userModel = require("../src/models/userSchema")
+const userModel = require("../src/models/userSchema");
+const { nextTick } = require("process");
 app.use(express.urlencoded({
     extended:false
 }))
@@ -28,7 +29,9 @@ app.get("/",(req,res)=>{
 })
 app.get("/login",(req,res)=>{
     //res.render('../../login.html')
+    console.log(__dirname)
     res.sendFile(path.join(__dirname, '../../login.html'));
+   // nextTick()
 })
 app.get("/userRegister",(req,res)=>{
     res.sendFile(path.join(__dirname, '../../userRegister.html'));
@@ -80,7 +83,7 @@ app.post("/login", async (req, res) => {try {const { email, password } = req.bod
  const isMatch = await bcrypt.compare(password, user.Password);
  if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
  const token = jwt.sign({ id: user._id },SECRET);
-console.log("Clear")
+console.log(__dirname)
  //return <Redirect to ='/'></Redirect>
- res.sendFile(path.join(__dirname+"../../index.html"));} 
+ return res.redirect('../../index.html');} 
  catch (err) {res.status(500).json({ error: err.message });}});
