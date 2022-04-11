@@ -1,0 +1,228 @@
+.image {
+  max-width: 200px;
+}
+body {
+  font-weight: 400;
+}
+.searchbox {
+  max-width: 960px;
+  border: 10px black;
+  padding: 2rem;
+}
+hr {
+  opacity: 30%;
+}
+.carousel-item {
+  height: 32rem;
+
+  position: relative;
+  background-position: center;
+  background-size: cover;
+}
+.overlay-image {
+  position: absolute;
+  background-position: center;
+  background-size: cover;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.carousel-inner {
+
+  padding: 25px;
+}
+.mid {
+    display: block;
+    margin: 50px auto 0 auto;
+    width: 100%;
+}
+.rbar {
+    display: inline-block;
+}
+.rbar li {
+    display: inline-block;
+    padding: 0px 80px;
+}
+a{
+  text-decoration: none;
+}
+.rbar li a {
+    font-size: 20px;
+    color: 	rgb(160,160,160);
+    text-decoration: none;
+
+}
+.rbar li a:hover,
+.rbar li a:active {
+    transition: 0.35s;
+    color: rgb(0, 0, 0);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+html {
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 10px 70px;
+  position: fixed;
+  top: 0;
+  background-color: white;
+  width: 100%;
+
+}
+
+.line {
+  margin-top: 149px;
+  padding: 80px 0 80px 85px;
+  color: white;
+  font-family: 'Roboto';
+  font-size: 22px;
+  background-color: rgba(000, 099, 166, 1);
+}
+
+.institut {
+  padding-left: 140px;
+  padding-right: 8px;
+  font-size: 36px;
+  font-weight: lighter;
+}
+
+@media screen and (max-width: 1200px) {
+  .line {
+    display: flex;
+    flex-direction: column;
+  }
+  .institut {
+    display: none;
+  }
+ }
+
+@media screen and (max-width: 770px) {
+  .line {
+    padding: 50px 0 50px 25px;
+    margin-top: 78px;
+  }
+  .header {
+    padding: 0px 15px;
+  }
+  .header img {
+    width: 150px;
+  }
+}
+
+.contents {
+ display: flex;
+ flex-wrap: wrap;
+ padding: 75px;
+ justify-content: center;
+ margin: 0 auto;
+}
+
+.images {
+ transition: transform .2s;
+ width: 250px;
+ height: 250px;
+ margin: 20px 40px;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ transform: scale(1.25);
+ border-radius: 20px;
+}
+
+.images:hover {
+  transform: scale(1.5);
+}
+
+@media screen and (max-width: 1700px) {
+  .images {
+    margin: 20px auto;
+
+  }
+}
+
+.my-5{
+  margin-bottom: 0;
+}
+.form-control {
+	min-height: 41px;
+	background: #fff;
+	box-shadow: none !important;
+	border-color: #e3e3e3;
+}
+.form-control:focus {
+	border-color: #70c5c0;
+}
+.form-control, .btn {        
+	border-radius: 2px;
+}
+.login-form {
+	width: 350px;
+	margin: 0 auto;
+	padding: 100px 0 30px;		
+}
+.login-form form {
+	color: #7a7a7a;
+	border-radius: 2px;
+	margin-bottom: 15px;
+	font-size: 13px;
+	background: #ececec;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;	
+	position: relative;	
+}
+.login-form h2 {
+	font-size: 22px;
+	margin: 35px 0 25px;
+}
+.login-form .avatar {
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: -50px;
+	width: 95px;
+	height: 95px;
+	border-radius: 50%;
+	z-index: 9;
+	background: #70c5c0;
+	padding: 15px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.login-form .avatar img {
+	width: 100%;
+}	
+.login-form input[type="checkbox"] {
+	position: relative;
+	top: 1px;
+}
+.login-form .btn, .login-form .btn:active {        
+	font-size: 16px;
+	font-weight: bold;
+	background: #70c5c0 !important;
+	border: none;
+	margin-bottom: 20px;
+}
+.login-form .btn:hover, .login-form .btn:focus {
+	background: #50b8b3 !important;
+}    
+.login-form a {
+	color: #fff;
+	text-decoration: underline;
+}
+.login-form a:hover {
+	text-decoration: none;
+}
+.login-form form a {
+	color: #7a7a7a;
+	text-decoration: none;
+}
+.login-form form a:hover {
+	text-decoration: underline;
+}
+.login-form .bottom-action {
+	font-size: 14px;
+}
