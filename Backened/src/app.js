@@ -27,6 +27,7 @@ app.get("/",(req,res)=>{
     console.log(__dirname)
 })
 app.get("/login",(req,res)=>{
+    //res.render('../../login.html')
     res.sendFile(path.join(__dirname, '../../login.html'));
 })
 app.get("/userRegister",(req,res)=>{
