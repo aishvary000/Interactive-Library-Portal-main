@@ -5,13 +5,13 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.7"
+    "mongoose": "^6.2.7",
+    "react-router-dom": "^6.3.0"
   },
   "name": "interactive-library-portal",
   "description": "Test Link - https://library-portal.netlify.app/",
   "version": "1.0.0",
   "main": "script.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
