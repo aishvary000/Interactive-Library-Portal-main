@@ -4,8 +4,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.7",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
     "react-router-dom": "^6.3.0"
   },
   "name": "interactive-library-portal",
