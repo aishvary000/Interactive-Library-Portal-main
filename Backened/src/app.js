@@ -101,7 +101,7 @@ app.post("/userRegister", async (req, res) => {
 app.post("/login", passport.authenticate('local',{
   
   successRedirect:'/',
-  failureRedirect:'/login.html',
+  failureRedirect:'pages/login.ejs',
   failureFlash:true
 }))
 
