@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const ejs = require('ejs')
 const dotenv = require('dotenv');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -18,7 +19,12 @@ require("./db/conn");
 dotenv.config();
 
 const app = express();
+app.use(express.static('../../public'));
+app.set('views', path.join(__dirname, '../../views'))
+app.set('view engine', 'ejs');
+
 const userModel = require("../src/models/userSchema");
+app.use(express.static('../../public'))
 app.use(flash())
 app.use(session({
   secret:"secret",
@@ -44,19 +50,21 @@ app.listen(PORT, () => {
 
 app.get("/", (req, res) => {
   // res.redirect('../../index')
-  res.sendFile(path.join(__dirname, "../../index.html"));
-  console.log(__dirname);
+  //console.log(res.error)
+  //res.redirect('../../views/pages/index.ejs')
+ // app.set('view engine', 'ejs');
+
+  res.render('pages/index.ejs')
 });
 
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
-  console.log(__dirname);
-  res.sendFile(path.join(__dirname, "../../login.html"));
+  res.render('pages/login.ejs')
   // nextTick()
 });
 
 app.get("/userRegister", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../userRegister.html"));
+  res.render('pages/userRegister.ejs')
 });
 
 //registering user
