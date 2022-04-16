@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const ejs = require('ejs')
-const dotenv = require('dotenv');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const PORT = process.env.PORT || 3000;
@@ -9,17 +8,48 @@ const SECRET = "MY_SECRET_KEY";
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
+const mongoose = require("mongoose")
 const initializePassport = require("../passport_config")
+const MongoStore = require('connect-mongo')
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') })
+
+/*connecting to database*************************/
+
+const uri = "mongodb+srv://aishvary000:UPU9v2Z4wGaKRgF@cluster0.thedj.mongodb.net/LibraryPortal?retryWrites=true&w=majority";
+const connection = mongoose.connect(uri,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+  
+
+}).then(()=>{
+    console.log("Conection is succesful")
+}).catch((e)=>{
+    console.log("Connection failed : "+e)
+})
+/**
+ * -------------- SESSION SETUP ----------------
+ */
+
+/**
+ * The MongoStore is used to store session data.  We will learn more about this in the post.
+ * 
+ * Note that the `connection` used for the MongoStore is the same connection that we are using above
+ */
+ const sessionStore = new MongoStore({
+   collectionName:"session",
+  mongoUrl:uri
+ })
+
 initializePassport(passport,async email=>{
   const user = await userModel.findOne({ Email: email });
   return user
 
+},async id => {
+  const user = await userModel.find({_id:id})
+  //console.log("Called : "+user)
+  return user
 })
-require("./db/conn");
-dotenv.config();
-
 const app = express();
-app.use(express.static('../../public'));
 app.set('views', path.join(__dirname, '../../views'))
 app.set('view engine', 'ejs');
 
@@ -27,13 +57,16 @@ const userModel = require("../src/models/userSchema");
 app.use(express.static('../../public'))
 app.use(flash())
 app.use(session({
-  secret:"secret",
+  secret:process.env.SECRET,
   resave:false,
-  saveUninitialized:false
+  saveUninitialized:false,
+  store:sessionStore,
+  cookie:{
+    maxAge:1000*60*60*24
+  }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-
 
 app.use(
   express.urlencoded({
@@ -56,7 +89,13 @@ app.get("/", (req, res) => {
 
   res.render('pages/index.ejs')
 });
+app.get("/afterLogin",(req,res)=>{
 
+  
+    const name = req.user[0].Email
+    console.log(name)
+  res.render('pages/afterLogin.ejs',{name:"Welcome "+name})
+})
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
   res.render('pages/login.ejs')
@@ -88,7 +127,8 @@ app.post("/userRegister", async (req, res) => {
         Name: username,
       });
       const registeredUser = await user.save();
-      res.status(201).sendFile(path.join(__dirname, "../../index.html"));
+    
+      res.render('pages/login.ejs')
     } else {
       res.send("Password mismatch");
     }
@@ -100,10 +140,18 @@ app.post("/userRegister", async (req, res) => {
 // Login
 app.post("/login", passport.authenticate('local',{
   
-  successRedirect:'/',
+  successRedirect:'/afterLogin',
   failureRedirect:'/login',
   failureFlash:true
 }))
+
+// function checkAuthenticated(req,res,next)
+// {
+//   if(res.isAuthenticated())
+//   {
+
+//   }
+// }
 
   
   // try {
