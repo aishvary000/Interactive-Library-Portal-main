@@ -1,72 +1,79 @@
 const express = require("express");
 const path = require("path");
-const ejs = require('ejs')
+const ejs = require("ejs");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const PORT = process.env.PORT || 3000;
 const SECRET = "MY_SECRET_KEY";
-const passport = require('passport')
-const flash = require('express-flash')
-const session = require('express-session')
-const mongoose = require("mongoose")
-const initializePassport = require("../passport_config")
-const MongoStore = require('connect-mongo')
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') })
+const passport = require("passport");
+const flash = require("express-flash");
+const session = require("express-session");
+const mongoose = require("mongoose");
+const initializePassport = require("../passport_config");
+const MongoStore = require("connect-mongo");
+require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 /*connecting to database*************************/
 
-const uri = "mongodb+srv://aishvary000:UPU9v2Z4wGaKRgF@cluster0.thedj.mongodb.net/LibraryPortal?retryWrites=true&w=majority";
-const connection = mongoose.connect(uri,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-  
-
-}).then(()=>{
-    console.log("Conection is succesful")
-}).catch((e)=>{
-    console.log("Connection failed : "+e)
-})
+const uri =
+  "mongodb+srv://aishvary000:UPU9v2Z4wGaKRgF@cluster0.thedj.mongodb.net/LibraryPortal?retryWrites=true&w=majority";
+const connection = mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Conection is succesful");
+  })
+  .catch((e) => {
+    console.log("Connection failed : " + e);
+  });
 /**
  * -------------- SESSION SETUP ----------------
  */
 
 /**
  * The MongoStore is used to store session data.  We will learn more about this in the post.
- * 
+ *
  * Note that the `connection` used for the MongoStore is the same connection that we are using above
  */
- const sessionStore = new MongoStore({
-   collectionName:"session",
-  mongoUrl:uri
- })
+const sessionStore = new MongoStore({
+  collectionName: "session",
+  mongoUrl: uri,
+});
 
-initializePassport(passport,async email=>{
-  const user = await userModel.findOne({ Email: email });
-  return user
-
-},async id => {
-  const user = await userModel.find({_id:id})
-  //console.log("Called : "+user)
-  return user
-})
+initializePassport(
+  passport,
+  async (email) => {
+    const user = await userModel.findOne({ Email: email });
+    return user;
+  },
+  async (id) => {
+    const user = await userModel.find({ _id: id });
+    //console.log("Called : "+user)
+    return user;
+  }
+);
 const app = express();
-app.set('views', path.join(__dirname, '../../views'))
-app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "../../views"));
+app.set("view engine", "ejs");
 
 const userModel = require("../src/models/userSchema");
-app.use(express.static('../../public'))
-app.use(flash())
-app.use(session({
-  secret:process.env.SECRET,
-  resave:false,
-  saveUninitialized:false,
-  store:sessionStore,
-  cookie:{
-    maxAge:1000*60*60*24
-  }
-}))
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(express.static("../../public"));
+app.use(flash());
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: sessionStore,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(
   express.urlencoded({
@@ -82,28 +89,28 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
+  if (req.isAuthenticated) {
+    res.render("pages/afterLogin.ejs", { name: req.user[0].Email });
+  } else res.render("pages/index.ejs");
+
   // res.redirect('../../index')
   //console.log(res.error)
   //res.redirect('../../views/pages/index.ejs')
- // app.set('view engine', 'ejs');
-
-  res.render('pages/index.ejs')
+  // app.set('view engine', 'ejs');
 });
-app.get("/afterLogin",(req,res)=>{
-
-  
-    const name = req.user[0].Email
-    console.log(name)
-  res.render('pages/afterLogin.ejs',{name:"Welcome "+name})
-})
+app.get("/afterLogin", (req, res) => {
+  const name = req.user[0].Email;
+  console.log(name);
+  res.render("pages/afterLogin.ejs", { name: "Welcome " + name });
+});
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
-  res.render('pages/login.ejs')
+  res.render("pages/login.ejs");
   // nextTick()
 });
 
 app.get("/userRegister", (req, res) => {
-  res.render('pages/userRegister.ejs')
+  res.render("pages/userRegister.ejs");
 });
 
 //registering user
@@ -127,8 +134,8 @@ app.post("/userRegister", async (req, res) => {
         Name: username,
       });
       const registeredUser = await user.save();
-    
-      res.render('pages/login.ejs')
+
+      res.render("pages/login.ejs");
     } else {
       res.send("Password mismatch");
     }
@@ -138,12 +145,14 @@ app.post("/userRegister", async (req, res) => {
 });
 
 // Login
-app.post("/login", passport.authenticate('local',{
-  
-  successRedirect:'/afterLogin',
-  failureRedirect:'/login',
-  failureFlash:true
-}))
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/afterLogin",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
 
 // function checkAuthenticated(req,res,next)
 // {
@@ -153,24 +162,22 @@ app.post("/login", passport.authenticate('local',{
 //   }
 // }
 
-  
-  // try {
-  //   const { email, password } = req.body; //
-  //   // validateif
-  //   if (!email || !password)
-  //     return res.status(400).json({ msg: "Not all fields have been entered." });
-  //   const user = await userModel.findOne({ Email: email });
-  //   if (!user)
-  //     return res
-  //       .status(400)
-  //       .json({ msg: "No account with this email has been registered." });
-  //   const isMatch = await bcrypt.compare(password, user.Password);
-  //   if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
-  //   const token = jwt.sign({ id: user._id }, SECRET);
-    //console.log(__dirname)
-    //return <Redirect to ='/'></Redirect>
+// try {
+//   const { email, password } = req.body; //
+//   // validateif
+//   if (!email || !password)
+//     return res.status(400).json({ msg: "Not all fields have been entered." });
+//   const user = await userModel.findOne({ Email: email });
+//   if (!user)
+//     return res
+//       .status(400)
+//       .json({ msg: "No account with this email has been registered." });
+//   const isMatch = await bcrypt.compare(password, user.Password);
+//   if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
+//   const token = jwt.sign({ id: user._id }, SECRET);
+//console.log(__dirname)
+//return <Redirect to ='/'></Redirect>
 
-  //   return res.redirect("../../index.html");
-  // } catch (err) {
-  //   res.status(500).json({ error: err.message });
-
+//   return res.redirect("../../index.html");
+// } catch (err) {
+//   res.status(500).json({ error: err.message });
