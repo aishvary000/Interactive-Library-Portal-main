@@ -90,8 +90,13 @@ app.listen(PORT, () => {
 
 app.get("/", (req, res) => {
   if (req.isAuthenticated) {
-    res.render("pages/afterLogin.ejs", { name: req.user[0].Email });
-  } else res.render("pages/index.ejs");
+    var  toDisplay = ""
+    if(req.user != null)
+      toDisplay = req.user[0].Email
+    else
+      toDisplay = "Login/Register"
+    res.render("pages/index.ejs", { name: toDisplay});
+  } else res.render("pages/index.ejs",{name:Login/Register});
 
   // res.redirect('../../index')
   //console.log(res.error)
