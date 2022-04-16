@@ -98,11 +98,6 @@ app.get("/", (req, res) => {
   //res.redirect('../../views/pages/index.ejs')
   // app.set('view engine', 'ejs');
 });
-app.get("/afterLogin", (req, res) => {
-  const name = req.user[0].Email;
-  console.log(name);
-  res.render("pages/afterLogin.ejs", { name: "Welcome " + name });
-});
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
   res.render("pages/login.ejs");
@@ -148,7 +143,7 @@ app.post("/userRegister", async (req, res) => {
 app.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/afterLogin",
+    successRedirect: "/",
     failureRedirect: "/login",
     failureFlash: true,
   })
