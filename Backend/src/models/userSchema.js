@@ -14,7 +14,11 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-   
+    Image:
+    {
+        data: Buffer,
+        contentType: String
+    }
 })
 
 const register = new mongoose.model("RegisterdUser",userSchema)
