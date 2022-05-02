@@ -142,6 +142,7 @@ app.post("/userRegister",async (req, res) => {
     const cpassword = req.body.confirmpassword;
     const username = req.body.username;
     const email = req.body.email;
+    console.log("Email is : "+email);
     const user1 = await isValid(email)
     // var img = fs.readFileSync(req.file.path);
     // var encode_img = img.toString('base64');
