@@ -9,13 +9,18 @@ const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
 const mongoose = require("mongoose");
+const validUsers = require("../src/models/studentsCommomSchema")
 const initializePassport = require("../passport_config");
 const MongoStore = require("connect-mongo");
+var multer = require('multer');
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 /*connecting to database*************************/
 // pwd:UPU9v2Z4wGaKRgF
 const uri ="mongodb://aishvary000:UPU9v2Z4wGaKRgF@cluster0-shard-00-00.thedj.mongodb.net:27017,cluster0-shard-00-01.thedj.mongodb.net:27017,cluster0-shard-00-02.thedj.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-y144ya-shard-0&authSource=admin&retryWrites=true&w=majority"
+
+//const uri = process.env.DB_STRING
+  console.log(uri)
 const connection = mongoose
   .connect(uri, {
     useNewUrlParser: true,
@@ -58,6 +63,7 @@ app.set("views", path.join(__dirname, "../../views"));
 app.set("view engine", "ejs");
 
 const userModel = require("../src/models/userSchema");
+const { nextTick } = require("process");
 app.use(express.static("../../public"));
 app.use(flash());
 app.use(
@@ -86,12 +92,24 @@ app.use(express.static(path.join(__dirname, "../../")));
 app.listen(PORT, () => {
   console.log("Listening on port 3000");
 });
+/*setting up multer for image storage */
 
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../../public/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+var uploadImage = multer({ storage: storage });
+/**...................................................... */
 app.get("/", (req, res) => {
   if (req.isAuthenticated) {
     var  toDisplay = ""
-    if(req.user != null)
-      toDisplay = req.user[0].Email
+    if(req.user != null && isValid(req.user[0].Email))
+      toDisplay = "Welcome "+req.user[0].Email
     else
       toDisplay = "Login/Register"
     res.render("pages/index.ejs", { name: toDisplay});
@@ -104,22 +122,35 @@ app.get("/", (req, res) => {
 });
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
+
   res.render("pages/login.ejs");
+ 
   // nextTick()
 });
+app.post("/uploadImage",function(req,res,next){
+var success = req.file.filename+"Uploaded Successfully"
 
+})
 app.get("/userRegister", (req, res) => {
   res.render("pages/userRegister.ejs");
 });
 
 //registering user
-app.post("/userRegister", async (req, res) => {
+app.post("/userRegister",uploadImage.single('file'), async (req, res,next) => {
   try {
     const password = req.body.password;
     const cpassword = req.body.confirmpassword;
     const username = req.body.username;
     const email = req.body.email;
-    if (password == cpassword) {
+    const user1 = await isValid(email)
+    var img = fs.readFileSync(req.file.path);
+    var encode_img = img.toString('base64');
+    var final_img = {
+        contentType:req.file.mimetype,
+        image:new Buffer(encode_img,'base64')
+    };
+    if (user1) {
+      console.log("User is present");
       var existingUser = await userModel.findOne({ Email: email });
       if (existingUser)
         return res
@@ -131,6 +162,7 @@ app.post("/userRegister", async (req, res) => {
         Email: email,
         Password: passwordHash,
         Name: username,
+        Image:final_img
       });
       const registeredUser = await user.save();
 
@@ -146,13 +178,21 @@ app.post("/userRegister", async (req, res) => {
 // Login
 app.post(
   "/login",
+ 
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
     failureFlash: true,
   })
 );
+async function isValid(email)
+{
+  console.log(email)
+  const user = await validUsers.findOne({EMAIL:email})
+  return user
+  
 
+}
 // function checkAuthenticated(req,res,next)
 // {
 //   if(res.isAuthenticated())

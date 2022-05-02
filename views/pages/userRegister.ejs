@@ -30,7 +30,8 @@
     </div>
     <hr>
     <div class="login-form">
-        <form action="/userRegister" method="post">
+        <form action="/userRegister" method="post"
+        enctype="multipart/form-data">
             <div class="avatar">
                 <img src="images/add-user.png" alt="Avatar">
             </div>
@@ -38,16 +39,29 @@
             <div class="form-group">
                 <input type="text" class="form-control" name="username" placeholder="Username" required="required">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 5px;">
                 <input type="text" class="form-control" name="email" placeholder="Email" required="required">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 5px;">
                 <input type="password" class="form-control" name="password" placeholder="Password" required="required">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 5px;">
                 <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password" required="required">
-            </div>             
-            <div class="form-group">
+            </div>
+            <div class="form-group " style="margin-top: 10px;">
+          
+                    <a style="color:black;font-size: medium;">Profile Picture </a>
+              </div>
+              <div class="form-group " style="margin-top: 5px;">
+          
+                    <input
+                type="file"
+                name="file"
+                id="input-files"
+                class="form-control-file border"
+              />
+                </div>            
+            <div class="form-group" style="margin-top: 20px;">
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
             </div>
            

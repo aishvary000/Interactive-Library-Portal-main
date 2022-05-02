@@ -366,3 +366,21 @@ html {
 .login-form .bottom-action {
 	font-size: 14px;
 }
+#leftbox {
+  float:left; 
+  
+  width:30%;
+  /* height:280px; */ 
+}
+#middlebox{
+  float:left; 
+  
+  width:30%;
+  height:280px;
+}
+#rightbox{
+  float:right;
+  width: 70%;
+  /* width:25%;
+  height:280px; */
+}
