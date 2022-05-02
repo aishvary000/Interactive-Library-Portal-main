@@ -108,12 +108,12 @@ var uploadImage = multer({ storage: storage });
 app.get("/", (req, res) => {
   if (req.isAuthenticated) {
     var  toDisplay = ""
-    if(req.user != null && isValid(req.user[0].Email))
+    if(req.user != null)
       toDisplay = "Welcome "+req.user[0].Email
     else
       toDisplay = "Login/Register"
     res.render("pages/index.ejs", { name: toDisplay});
-  } else res.render("pages/index.ejs",{name:Login/Register});
+  } else res.render("pages/index.ejs",{name:"Login/Register"});
 
   // res.redirect('../../index')
   //console.log(res.error)
@@ -136,19 +136,20 @@ app.get("/userRegister", (req, res) => {
 });
 
 //registering user
-app.post("/userRegister",uploadImage.single('file'), async (req, res,next) => {
+app.post("/userRegister",async (req, res) => {
   try {
     const password = req.body.password;
     const cpassword = req.body.confirmpassword;
     const username = req.body.username;
     const email = req.body.email;
+    console.log("Email is : "+email);
     const user1 = await isValid(email)
-    var img = fs.readFileSync(req.file.path);
-    var encode_img = img.toString('base64');
-    var final_img = {
-        contentType:req.file.mimetype,
-        image:new Buffer(encode_img,'base64')
-    };
+    // var img = fs.readFileSync(req.file.path);
+    // var encode_img = img.toString('base64');
+    // var final_img = {
+    //     contentType:req.file.mimetype,
+    //     image:new Buffer(encode_img,'base64')
+    // };
     if (user1) {
       console.log("User is present");
       var existingUser = await userModel.findOne({ Email: email });
@@ -162,7 +163,7 @@ app.post("/userRegister",uploadImage.single('file'), async (req, res,next) => {
         Email: email,
         Password: passwordHash,
         Name: username,
-        Image:final_img
+        //Image:final_img
       });
       const registeredUser = await user.save();
 
