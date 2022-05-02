@@ -5,23 +5,24 @@
 </head>
 <body>
     <div class="m-4">
-        <nav class="navbar navbar-expand-lg navbar-light ">
+        <nav class="navbar my-nav navbar-expand-lg navbar-light ">
             <div class="container-fluid">
-                <a href="https://www.lnmiit.ac.in/ class ="navbar-brand"><img class="image"src="images/LNMIITlogo.png" alt="LNMIIT LOGO" ></a>
+                <a href="https://www.lnmiit.ac.in/" class ="navbar-brand"><img class="image"src="images/LNMIITlogo.png" alt="LNMIIT LOGO" ></a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class=" menu collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">
-                        
-                        <a href="/" class="nav-item nav-link active">Home</a>
-                        <a href="/bookFinder" class="nav-item nav-link">Search</a>
-                        <a href="/services" class="nav-item nav-link">Services</a>
-                        <a href="/eResources" class="nav-item nav-link">eResource</a>
-                        <a href="/Research" class="nav-item nav-link">Research</a>
-                        <a href="/askForHelp" class="nav-item nav-link">Ask For Help</a>
-                        <a href="/aboutUs" class="nav-item nav-link">About Us</a>
-                    </div>
+                        <ul class="exo-menu">
+                        <li><a href="/" class="nav-item nav-link active">Home</a></li>
+                        <%- include('../partials/findandborrow.ejs') %>
+                        <%- include('../partials/collections.ejs') %>
+                        <%- include('../partials/services.ejs') %>
+                        <%- include('../partials/researchsupport.ejs') %>
+                        <%- include('../partials/about.ejs') %>
+                        <li class="nav-item nav-link"><a href="#">Ask The Librarian</a></li>
+                      </ul>
+                      </div>
                     <div class="navbar-nav ms-auto">
                         <a href="/login" class="nav-item nav-link"><%= name %></a>
                     </div>
@@ -30,7 +31,7 @@
         </nav>
     </div>
     <hr>
-    <div id="carouselExampleIndicators" class="carousel container-fluid slide" data-bs-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel my-carousel container-fluid slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>

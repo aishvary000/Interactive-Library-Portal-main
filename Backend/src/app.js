@@ -14,9 +14,8 @@ const MongoStore = require("connect-mongo");
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 /*connecting to database*************************/
-
-const uri =
-  "mongodb+srv://aishvary000:UPU9v2Z4wGaKRgF@cluster0.thedj.mongodb.net/LibraryPortal?retryWrites=true&w=majority";
+// pwd:UPU9v2Z4wGaKRgF
+const uri ="mongodb://aishvary000:UPU9v2Z4wGaKRgF@cluster0-shard-00-00.thedj.mongodb.net:27017,cluster0-shard-00-01.thedj.mongodb.net:27017,cluster0-shard-00-02.thedj.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-y144ya-shard-0&authSource=admin&retryWrites=true&w=majority"
 const connection = mongoose
   .connect(uri, {
     useNewUrlParser: true,
