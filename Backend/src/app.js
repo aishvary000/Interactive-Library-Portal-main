@@ -113,7 +113,7 @@ app.get("/", (req, res) => {
     else
       toDisplay = "Login/Register"
     res.render("pages/index.ejs", { name: toDisplay});
-  } else res.render("pages/index.ejs",{name:Login/Register});
+  } else res.render("pages/index.ejs",{name:"Login/Register"});
 
   // res.redirect('../../index')
   //console.log(res.error)
