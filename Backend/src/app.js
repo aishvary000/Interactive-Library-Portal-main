@@ -136,7 +136,7 @@ app.get("/userRegister", (req, res) => {
 });
 
 //registering user
-app.post("/userRegister",async (req, res,next) => {
+app.post("/userRegister",async (req, res) => {
   try {
     const password = req.body.password;
     const cpassword = req.body.confirmpassword;
