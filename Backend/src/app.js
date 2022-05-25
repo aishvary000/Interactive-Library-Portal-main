@@ -143,13 +143,14 @@ app.post("/userRegister",async (req, res) => {
     const username = req.body.username;
     const email = req.body.email;
     console.log("Email is : "+email);
-    const user1 = await isValid(email)
+    const user1 = await isValid(email);
     // var img = fs.readFileSync(req.file.path);
     // var encode_img = img.toString('base64');
     // var final_img = {
     //     contentType:req.file.mimetype,
     //     image:new Buffer(encode_img,'base64')
     // };
+    console.log("hello")
     if (user1) {
       console.log("User is present");
       var existingUser = await userModel.findOne({ Email: email });
