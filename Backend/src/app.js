@@ -138,8 +138,17 @@ var success = req.file.filename+"Uploaded Successfully"
 app.get("/userRegister", (req, res) => {
   res.render("pages/userRegister.ejs");
 });
+app.get("/borrowingprivileges", (req, res) => {
+  res.render("partials/borrowingprivileges.ejs");
+});
+app.get("/ill", (req, res) => {
+  res.render("partials/ill.ejs");
+});
+app.get("/cddvds", (req, res) => {
+  res.render("partials/cddvds.ejs");
+});
 app.get("/collectionExpanded", (req, res) => {
-  res.render("partials/collectionExpanded.ejs");
+  res.render("partials/cddvds.ejs");
 });
 //registering user
 app.post("/userRegister",async (req, res) => {
