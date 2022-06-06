@@ -121,6 +121,9 @@ app.get("/", (req, res) => {
   //res.redirect('../../views/pages/index.ejs')
   // app.set('view engine', 'ejs');
 });
+app.get("/researchTools",(req,res)=>{
+  res.render("partials/researchTools.ejs")
+})
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
 
