@@ -148,7 +148,7 @@ app.get("/cddvds", (req, res) => {
   res.render("partials/cddvds.ejs");
 });
 app.get("/collectionExpanded", (req, res) => {
-  res.render("partials/cddvds.ejs");
+  res.render("partials/collectionExpanded.ejs");
 });
 //registering user
 app.post("/userRegister",async (req, res) => {
