@@ -108,7 +108,7 @@ var uploadImage = multer({ storage: storage });
 app.get("/", (req, res) => {
   if (req.isAuthenticated) {
     var  toDisplay = ""
-    console.log("Fine")
+    //console.log("Fine")
     if(req.user != null)
       toDisplay = "Welcome "+req.user[0].Email
     else
