@@ -138,7 +138,9 @@ var success = req.file.filename+"Uploaded Successfully"
 app.get("/userRegister", (req, res) => {
   res.render("pages/userRegister.ejs");
 });
-
+app.get("/collectionExpanded", (req, res) => {
+  res.render("partials/collectionExpanded.ejs");
+});
 //registering user
 app.post("/userRegister",async (req, res) => {
   try {
