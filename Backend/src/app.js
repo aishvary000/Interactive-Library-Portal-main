@@ -3,7 +3,7 @@ const path = require("path");
 const ejs = require("ejs");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5500;
 const SECRET = "MY_SECRET_KEY";
 const passport = require("passport");
 const flash = require("express-flash");
@@ -137,7 +137,7 @@ app.get("/researchTools",(req,res)=>{
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
   console.log("Getting here")
-  res.render("pages/login.ejs");
+  res.render("pages/login.ejs",{name:"Login/Register"});
  
   // nextTick()
 });
@@ -196,7 +196,7 @@ app.post("/userRegister",async (req, res) => {
       });
       const registeredUser = await user.save();
 
-      res.render("pages/login.ejs");
+      res.render("pages/login.ejs",{name:"Login/Register"});
     // } else {
     //   res.send("Password mismatch");
     // }
