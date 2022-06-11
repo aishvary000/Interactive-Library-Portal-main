@@ -13,13 +13,15 @@ function initialize(passport,getUserByEmail,getUserById)
             return done(null,false,{message:"No user with that email"}) //error,userFound,
         }
         try{
-            //console.log("User found: "+user)
+          //  console.log("User found: "+user)
+            console.log(password+":"+user.Password)
             if(await bcrypt.compare(password,user.Password))
             {
-                //console.log("User found: "+user.Email)
+               // console.log("User found: "+user.Email)
                 return done(null,user)
             }
             else{
+                //console.log("Password")
                 return done(null,false,{message:'Password Incorrect'})
             } 
         }
@@ -28,7 +30,6 @@ function initialize(passport,getUserByEmail,getUserById)
             return done(e)
         }
     }
-
     passport.use(new localStrategy({
         usernameField:'email'
     },authenticateUser))

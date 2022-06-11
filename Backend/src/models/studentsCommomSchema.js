@@ -32,5 +32,5 @@ const studentsCommonSchema = new mongoose.Schema({
    
 })
 
-const register = new mongoose.model("validusers",studentsCommonSchema)
-module.exports = register
+const validusers = new mongoose.model("validUsers",studentsCommonSchema,"validusers")
+module.exports = validusers

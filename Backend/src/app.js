@@ -10,6 +10,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const validUsers = require("../src/models/studentsCommomSchema")
+const RegisteredUser = require("../src/models/userSchema")
 const initializePassport = require("../passport_config");
 const MongoStore = require("connect-mongo");
 var multer = require('multer');
@@ -17,7 +18,7 @@ require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 /*connecting to database*************************/
 // pwd:UPU9v2Z4wGaKRgF
-const uri ="mongodb://aishvary000:UPU9v2Z4wGaKRgF@cluster0-shard-00-00.thedj.mongodb.net:27017,cluster0-shard-00-01.thedj.mongodb.net:27017,cluster0-shard-00-02.thedj.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-y144ya-shard-0&authSource=admin&retryWrites=true&w=majority"
+const uri ="mongodb://aishvary000:UPU9v2Z4wGaKRgF@cluster0-shard-00-00.thedj.mongodb.net:27017,cluster0-shard-00-01.thedj.mongodb.net:27017,cluster0-shard-00-02.thedj.mongodb.net:27017/LibraryPortal?ssl=true&replicaSet=atlas-y144ya-shard-0&authSource=admin&retryWrites=true&w=majority"
 
 //const uri = process.env.DB_STRING
   console.log(uri)
@@ -49,11 +50,14 @@ const sessionStore = new MongoStore({
 initializePassport(
   passport,
   async (email) => {
-    const user = await userModel.findOne({ Email: email });
+    const user = await RegisteredUser.findOne({Email:email})
+    console.log("Caaling from "+email)
+    if(user)
+    console.log("Got")
     return user;
   },
   async (id) => {
-    const user = await userModel.find({ _id: id });
+    const user = await RegisteredUser.find({ _id: id });
     //console.log("Called : "+user)
     return user;
   }
@@ -62,7 +66,7 @@ const app = express();
 app.set("views", path.join(__dirname, "../../views"));
 app.set("view engine", "ejs");
 
-const userModel = require("../src/models/userSchema");
+//const userModel = require("../src/models/userSchema");
 const { nextTick } = require("process");
 app.use(express.static("../../public"));
 app.use(flash());
@@ -110,9 +114,15 @@ app.get("/", (req, res) => {
     var  toDisplay = ""
     //console.log("Fine")
     if(req.user != null)
-      toDisplay = "Welcome "+req.user[0].Email
+    {
+      console.log("OKAY"+req.user[0].Email)
+      toDisplay = "Welcome, "+req.user[0].Name+" !"
+    }
+    // if(req.user != null)
+    //   toDisplay = "Welcome "+req.user[0].Email
     else
       toDisplay = "Login/Register"
+    console.log("anme is : "+toDisplay)
     res.render("pages/index.ejs", { name: toDisplay});
   } else res.render("pages/index.ejs",{name:"Login/Register"});
 
@@ -126,7 +136,7 @@ app.get("/researchTools",(req,res)=>{
 })
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
-
+  console.log("Getting here")
   res.render("pages/login.ejs");
  
   // nextTick()
@@ -135,7 +145,8 @@ app.post("/uploadImage",function(req,res,next){
 var success = req.file.filename+"Uploaded Successfully"
 
 })
-app.get("/userRegister", (req, res) => {
+app.get("/userRegisterPage", (req, res) => {
+  console.log("Getting here 1")
   res.render("pages/userRegister.ejs");
 });
 app.get("/borrowingprivileges", (req, res) => {
@@ -166,16 +177,18 @@ app.post("/userRegister",async (req, res) => {
     //     image:new Buffer(encode_img,'base64')
     // };
     console.log("hello")
-    if (user1) {
+    if(user1)
+    {
       console.log("User is present");
-      var existingUser = await userModel.findOne({ Email: email });
+      var existingUser = await RegisteredUser.findOne({ Email: email });
       if (existingUser)
         return res
           .status(400)
           .json({ msg: "An account with this email already exists." });
+      console.log("YEPE")
       const salt = await bcrypt.genSalt();
       const passwordHash = await bcrypt.hash(password, salt);
-      const user = new userModel({
+      const user = new RegisteredUser({
         Email: email,
         Password: passwordHash,
         Name: username,
@@ -184,16 +197,25 @@ app.post("/userRegister",async (req, res) => {
       const registeredUser = await user.save();
 
       res.render("pages/login.ejs");
-    } else {
-      res.send("Password mismatch");
-    }
-  } catch (error) {
+    // } else {
+    //   res.send("Password mismatch");
+    // }
+  }
+  else
+  {
+    return res
+          .status(400)
+          .json({ msg: "Sorry only organization emails are allowed." });
+  }
+} 
+  catch (error) {
     res.status(400).send(error);
   }
 });
 
 // Login
 app.post(
+ 
   "/login",
  
   passport.authenticate("local", {
