@@ -14,6 +14,7 @@ const RegisteredUser = require("../src/models/userSchema")
 const initializePassport = require("../passport_config");
 const MongoStore = require("connect-mongo");
 var multer = require('multer');
+var userName  = ""
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 /*connecting to database*************************/
@@ -115,13 +116,19 @@ app.get("/", (req, res) => {
     //console.log("Fine")
     if(req.user != null)
     {
+      userName = "Welcome, "+req.user[0].Name+" !"
       console.log("OKAY"+req.user[0].Email)
       toDisplay = "Welcome, "+req.user[0].Name+" !"
     }
     // if(req.user != null)
     //   toDisplay = "Welcome "+req.user[0].Email
     else
+    {
+
       toDisplay = "Login/Register"
+      userName = toDisplay
+    }
+     
     console.log("anme is : "+toDisplay)
     res.render("pages/index.ejs", { name: toDisplay});
   } else res.render("pages/index.ejs",{name:"Login/Register"});
@@ -132,7 +139,7 @@ app.get("/", (req, res) => {
   // app.set('view engine', 'ejs');
 });
 app.get("/researchTools",(req,res)=>{
-  res.render("partials/researchTools.ejs")
+  res.render("partials/researchTools.ejs",{name:userName})
 })
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
@@ -147,19 +154,19 @@ var success = req.file.filename+"Uploaded Successfully"
 })
 app.get("/userRegisterPage", (req, res) => {
   console.log("Getting here 1")
-  res.render("pages/userRegister.ejs");
+  res.render("pages/userRegister.ejs",{name:"Login/Register"});
 });
 app.get("/borrowingprivileges", (req, res) => {
-  res.render("partials/borrowingprivileges.ejs");
+  res.render("partials/borrowingprivileges.ejs",{name:userName});
 });
 app.get("/ill", (req, res) => {
-  res.render("partials/ill.ejs");
+  res.render("partials/ill.ejs",{name:userName});
 });
 app.get("/cddvds", (req, res) => {
-  res.render("partials/cddvds.ejs");
+  res.render("partials/cddvds.ejs",{name:userName});
 });
 app.get("/collectionExpanded", (req, res) => {
-  res.render("partials/collectionExpanded.ejs");
+  res.render("partials/collectionExpanded.ejs",{name:userName});
 });
 //registering user
 app.post("/userRegister",async (req, res) => {
