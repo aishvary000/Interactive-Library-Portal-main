@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.8",
+    "express": "^4.17.3",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.7",
+    "mongoose-type-phone": "^1.0.1",
+    "multer": "^1.4.4",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "react-router-dom": "^6.3.0"
+  },
+  "name": "interactive-library-portal",
+  "description": "Test Link - https://library-portal.netlify.app/",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garou357/Interactive-Library-Portal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garou357/Interactive-Library-Portal/issues"
+  },
+  "homepage": "https://github.com/garou357/Interactive-Library-Portal#readme"
+}

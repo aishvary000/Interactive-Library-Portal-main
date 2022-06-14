@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel ="stylesheet" href="../../public/style.css">
+</head>
+<body>
+    
+    <div class="m-4">
+        <nav class="navbar my-nav navbar-expand-lg navbar-light ">
+            <div class="container-fluid">
+                <a href="https://www.lnmiit.ac.in/" class ="navbar-brand"><img class="image"src="images/LNMIITlogo.png" alt="LNMIIT LOGO" ></a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class=" menu collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <ul class="exo-menu">
+                        <li><a href="/" class="nav-item nav-link active">Home</a></li>
+                        <%- include('../partials/findandborrow.ejs') %>
+                        <%- include('../partials/collections.ejs') %>
+                        <%- include('../partials/services.ejs') %>
+                        <%- include('../partials/researchsupport.ejs') %>
+                        <%- include('../partials/about.ejs') %>
+                        <li class="nav-item nav-link"><a href="#">Ask The Librarian</a></li>
+                      </ul>
+                      </div>
+                    <div class="navbar-nav ms-auto">
+                        <a href="/login" class="nav-item nav-link"><%= name %></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- <hr> -->
+    <div class="login-form">
+        <form action="/login" method="post">
+            <div class="avatar">
+                <img src="images/avatar.png" alt="Avatar">
+            </div>
+            <h2 class="text-center">Member Login</h2>   
+            <div class="form-group">
+                <input type="text" class="form-control" name="email" placeholder="Username" required="required">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            </div>        
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+            </div>
+            <!-- <a href = '/userRegisterPage'><button class="btn btn-primary btn-lg btn-block">Sign Up</button></a>
+    
+            <div class="bottom-action clearfix">
+                <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+                <a href="#" class="float-right">Forgot Password?</a>
+            </div>
+            -->
+        </form>
+        <div class="form-group">
+        <a href = '/userRegisterPage'><button class="btn btn-primary btn-lg btn-block">Sign Up</button></a>
+        </div>
+        <div class="bottom-action clearfix">
+            <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+            <a href="#" class="float-right">Forgot Password?</a>
+        </div>
+       
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/headers.ejs') %>
+</head>
+<body>
+    <div class="m-4">
+        <nav class="navbar my-nav navbar-expand-lg navbar-light ">
+            <div class="container-fluid">
+                <a href="https://www.lnmiit.ac.in/" class ="navbar-brand"><img class="image"src="images/LNMIITlogo.png" alt="LNMIIT LOGO" ></a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class=" menu collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <ul class="exo-menu">
+                        <li><a href="/" class="nav-item nav-link active">Home</a></li>
+                        <%- include('../partials/findandborrow.ejs') %>
+                        <%- include('../partials/collections.ejs') %>
+                        <%- include('../partials/services.ejs') %>
+                        <%- include('../partials/researchsupport.ejs') %>
+                        <%- include('../partials/about.ejs') %>
+                        <li class="nav-item nav-link"><a href="#">Ask The Librarian</a></li>
+                      </ul>
+                      </div>
+                    <div class="navbar-nav ms-auto">
+                        <a href="/login" class="nav-item nav-link"><%= name %></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <hr>
+    <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Request For Inter-Library Loan</h5>
+                        <p>The Library arranges books that are not available in its collection from other libraries
+                            in India on Inter-Library Loan (ILL) which our students can borrow under resource
+                            sharing.
+                            The Library has institutional memberships of the DELNET and IIT Gandhinagar and
+                            utilizes their services. There are nominal charges as stipulated by these institutions.
+                            To avail this service, please follow the link below:
+                        </p>
+                        <div class="text-center"><a href="https://docs.google.com/forms/d/e/1FAIpQLScW4MwjzIKrPXXF5cTAU2unLtrchiy47-itFWi-DGNVTnfguA/viewform" class="btn btn-primary">Request form</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

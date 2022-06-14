@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/headers.ejs') %>
+</head>
+<body>
+    <div class="m-4">
+        <nav class="navbar my-nav navbar-expand-lg navbar-light ">
+            <div class="container-fluid">
+                <a href="https://www.lnmiit.ac.in/" class ="navbar-brand"><img class="image"src="images/LNMIITlogo.png" alt="LNMIIT LOGO" ></a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class=" menu collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <ul class="exo-menu">
+                        <li><a href="/" class="nav-item nav-link active">Home</a></li>
+                        <%- include('../partials/findandborrow.ejs') %>
+                        <%- include('../partials/collections.ejs') %>
+                        <%- include('../partials/services.ejs') %>
+                        <%- include('../partials/researchsupport.ejs') %>
+                        <%- include('../partials/about.ejs') %>
+                        <li class="nav-item nav-link"><a href="#">Ask The Librarian</a></li>
+                      </ul>
+                      </div>
+                    <div class="navbar-nav ms-auto">
+                        <a href="/login" class="nav-item nav-link"><%= name %></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <hr>
+    <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Borrowing Privileges</h5>
+                        <p>The borrowing privileges for LNMIIT Faculty members, Research Scholars, students and staff are as
+            follows:
+            Category No. of Entitlements Duration
+            Faculty Members 20 Books 6 Months (One Semester)
+            <br>
+            PhD Scholars 8 Books 1 Month
+            <br>
+            PG Students 6 Books 1 Month
+            <br>
+            UG Students 4 Books 15 Days
+            <br>
+            Staff (Non Teaching) 5 Books 1 Month
+            <br>
+            Employees on Contract 2 Books 1 Month
+            <br>
+            1. To borrow books from the library, the users can search the Online Public Access
+            Catalogue (OPAC) and find specific information about the books online. The
+            search facility also explains to the users the availability of each item for
+            borrowing, including the current status of individual copies of an item; its
+            reservation status, borrower issued item details etc. Users can search books by
+            Title, Author, Subject Keywords, Publisher, Call Number and ISBN.
+            <br>
+            2. The borrower will be responsible for any loss or non-return of any books issued
+            against his/her identity card.
+            <br>
+            3. Reference books, Newspapers and Magazines/Journals should not be taken out
+            of the library. Books for competitive exams are not issuable. They are for
+            reference only.<br>
+            4. Absence from the institute will not be allowed as an excuse for the delay in the
+            return of books.<br>
+            5. Any kind of damage of library materials (marking, underlying, and clipping of
+            books) is absolutely forbidden. Readers shall be held responsible for any damage
+            done to the book belonging to the library and shall be required to replace it or pay
+the value+20% thereof.
+<br>
+6. If the book due date falls on a holiday for the library, the next working day will be
+taken as the due date.
+<br>
+7. One can reserve a book which is already issued out by logging on to the Online
+Public Access Catalogue with credentials
+<br>
+8. The books can be re-issued once if they are not on-demand or reserved by other
+students.
+<br>
+9. Back issues of periodicals (Journals / Magazines) can also be issued – Max 3
+issues for 7 days only.
+<br>
+10. The borrowers are requested to check the books &amp; other reading materials
+thoroughly for missing pages, chapters, any damages, markings etc before
+borrowing.
+<br>
+11. For overdue books, borrowers have to pay overdue fines according to library
+rules.
+<br>
+12. Materials issued out from the library are to be returned on or before the due date
+without any further delay at the Circulation Desk during its working hours.
+<br>
+13. Under special circumstances, the librarian may refuse the issue of books or recall
+the books already issued from any member without assigning any reason thereof.
+<br>
+14. Newly joined faculty members are expected to fill in the membership form by
+following the link below:
+                            </p>
+                            <div class="text-center"><a href="https://forms.gle/jPWsSn4sQ826DpCa7" class="btn btn-primary">Fill Form</a></div>
+                        </div>
+                    </div>
+                </div>
