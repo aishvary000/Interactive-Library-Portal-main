@@ -159,6 +159,9 @@ app.get("/userRegisterPage", (req, res) => {
 app.get("/borrowingprivileges", (req, res) => {
   res.render("partials/borrowingprivileges.ejs",{name:userName});
 });
+app.get("/books", (req, res) => {
+  res.render("partials/books.ejs",{name:userName});
+});
 app.get("/ill", (req, res) => {
   res.render("partials/ill.ejs",{name:userName});
 });
