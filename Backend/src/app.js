@@ -171,6 +171,9 @@ app.get("/cddvds", (req, res) => {
 app.get("/collectionExpanded", (req, res) => {
   res.render("partials/collectionExpanded.ejs",{name:userName});
 });
+app.get("/libdatabases", (req, res) => {
+  res.render("partials/libdatabases.ejs",{name:userName});
+});
 //registering user
 app.post("/userRegister",async (req, res) => {
   try {
