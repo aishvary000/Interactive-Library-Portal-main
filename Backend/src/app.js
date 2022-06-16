@@ -143,8 +143,10 @@ app.get("/researchTools",(req,res)=>{
 })
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
+  
   console.log("Getting here")
   res.render("pages/login.ejs",{name:"Login/Register"});
+  
  
   // nextTick()
 });

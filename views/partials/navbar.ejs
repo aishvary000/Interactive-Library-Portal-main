@@ -18,7 +18,23 @@
                   </ul>
                   </div>
                 <div class="navbar-nav ms-auto">
-                    <a href="/login" class="nav-item nav-link"><%= name %></a>
+                    <a href="/login" onclick="return checkUser()" class="nav-item nav-link"><%= name %></a>
+                    <script type="text/javascript">
+                        function checkUser () {
+                            console.log("OK I AM HERE")
+                            
+                            // return true or false, depending on whether you want to allow the `href` property to follow through or not
+                        }
+                    </script>
+                    <div class="btn-group" id="userMenu" style="display: none;">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          UserName <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a id="userProfile" href="#">User Profile</a></li>
+                          <li><a id="logOut" href="#">Logout</a></li>
+                        </ul>
+                      </div>
                 </div>
             </div>
         </div>
