@@ -4,42 +4,8 @@
   <%- include('../partials/headers.ejs') %>
 </head>
 <body>
-  <div class="m-4">
-    <nav class="navbar my-nav navbar-expand-lg navbar-light ">
-        <div class="container-fluid">
-            <a href="https://www.lnmiit.ac.in/" class ="navbar-brand"><img class="image"src="images/LNMIITlogo.png" alt="LNMIIT LOGO" ></a>
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class=" menu collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav">
-                    <ul class="exo-menu">
-                    <li><a href="/" class="nav-item nav-link active">Home</a></li>
-                    <%- include('../partials/findandborrow.ejs') %>
-                    <%- include('../partials/collections.ejs') %>
-                    <%- include('../partials/services.ejs') %>
-                    <%- include('../partials/researchsupport.ejs') %>
-                    <%- include('../partials/about.ejs') %>
-                    <li class="nav-item nav-link"><a href="#">Ask The Librarian</a></li>
-                  </ul>
-                  </div>
-                <div class="navbar-nav ms-auto">
-                    <a href = "/login"  class="nav-item nav-link"><%= name %></a>
-                    <div class="btn-group" id="userMenu" style="display: none;">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          UserName <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a id="userProfile" href="#">User Profile</a></li>
-                          <li><a id="logOut" href="#">Logout</a></li>
-                        </ul>
-                      </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-</div>
-    <!-- <hr> -->
+  <%- include('../partials/navbar.ejs') %>
+    <hr>
     <div id="carouselExampleIndicators" class="carousel my-carousel container-fluid slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
