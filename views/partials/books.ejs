@@ -4,37 +4,13 @@
   <%- include('../partials/headers.ejs') %>
 </head>
 <body>
-    <div class="m-4">
-        <nav class="navbar my-nav navbar-expand-lg navbar-light ">
-            <div class="container-fluid">
-                <a href="https://www.lnmiit.ac.in/" class ="navbar-brand"><img class="image"src="images/LNMIITlogo.png" alt="LNMIIT LOGO" ></a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class=" menu collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav">
-                        <ul class="exo-menu">
-                        <li><a href="/" class="nav-item nav-link active">Home</a></li>
-                        <%- include('../partials/findandborrow.ejs') %>
-                        <%- include('../partials/collections.ejs') %>
-                        <%- include('../partials/services.ejs') %>
-                        <%- include('../partials/researchsupport.ejs') %>
-                        <%- include('../partials/about.ejs') %>
-                        <li class="nav-item nav-link"><a href="#">Ask The Librarian</a></li>
-                      </ul>
-                      </div>
-                    <div class="navbar-nav ms-auto">
-                        <a href="/login" class="nav-item nav-link"><%= name %></a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
+    <%- include('../partials/navbar.ejs') %>
+
     <hr>
     <div class="container">
         <div class="col-md-12 text-center">
             <br>
-            <h1> Books</h1>
+            <h1>Books</h1>
             <br>
 
         </div>
@@ -42,7 +18,7 @@
             <div class="col-md-12">
                 <div class="card shadow p-3 mb-5 bg-white rounded">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Ouriginal</h5>
+                        <h5 class="card-title text-center">Print Books</h5>
                         <p class="card-text" spacing="50">
                             To support the academic programmes and the research pursuits of the
                             teaching community and the research scholars of the Institute. The Library
@@ -51,6 +27,7 @@
                             Communication technology and its allied areas. Dewey Decimal
                             Classification (DDC) 22 nd edition is followed for the classification of books
                             and organizing the collection on the shelf.
+                            <br>
                             Library holds the collection in the area of science and technology,
                             engineering, humanities, social sciences, management, general etc. The
                             collection is located and displayed from the main building (Hall No1) on the
@@ -76,9 +53,9 @@
                         <h5 class="card-title text-center">Reference Book</h5>
                         <p class="card-text">
                             Reference books are broadly divided into two sections:
-                            i. General references such as encyclopaedias, dictionaries, directories, handbooks,
+                            <br><strong>i.</strong> General references such as encyclopaedias, dictionaries, directories, handbooks,
                             geographical sources, manuals and others;
-                            ii. Subject reference which includes the books, other related reading materials etc, which are
+                            <br><strong>ii.</strong> Subject reference which includes the books, other related reading materials etc, which are
                             referred as reference materials under any particular course or subject. This section is located
                             in the stack area on the extended building on the ground floor with separate labels indicating
                             the reference collection.
@@ -95,16 +72,16 @@
                             The Young Learner’s Library (YLL) @ the LNMIIT Central Library is specially developed to
                             encourage reading and make children smarter by developing critical thinking skills and building
                             their vocabulary. The main objective of YLL is to provide young children with activities that will
-                            hold their interest.
+                            hold their interest.<br>
                             The YLL provides an excellent opportunity for children in the age group of 5 to 15 years with a
                             good collection of books covering Children’s Fiction, Stories, Actions and adventure, Science
                             Fiction, Education, Reference, Classics, Creativity, Facts so on and so forth. Any Faculty or Staff of
-                            LNMIIT, Jaipur whose children are in the age group of 5 – 15 years can become a member.
-                            Entitlements:
+                            LNMIIT, Jaipur whose children are in the age group of 5 – 15 years can become a member.<br>
+                            <strong>Entitlements:</strong><br>
                             Members can borrow three books at a time for 15 days. One can return books after two days
-                            and borrow new books.
-                            Timings of YLL
-                            Monday to Saturday: 5 pm to 7 pm
+                            and borrow new books.<br>
+                            <strong>Timings oy YLL:</strong><br>
+                            Monday to Saturday: 5 pm to 7 pm<br>
                             Sundays and Holidays : 10 am to 12 noon and 4 pm to 6 pm
                             <br>
                             <br>

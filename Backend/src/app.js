@@ -176,6 +176,9 @@ app.get("/collectionExpanded", (req, res) => {
 app.get("/libdatabases", (req, res) => {
   res.render("partials/libdatabases.ejs",{name:userName});
 });
+app.get("/askus", (req, res) => {
+  res.render("partials/askus.ejs",{name:userName});
+});
 //registering user
 app.post("/userRegister",async (req, res) => {
   try {
