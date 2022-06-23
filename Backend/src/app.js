@@ -127,7 +127,7 @@ app.get("/", (req, res) => {
     //   toDisplay = "Welcome "+req.user[0].Email
     else
     {
-
+      isLoggedIn=false
       toDisplay = "Login/Register"
       userName = toDisplay
     }

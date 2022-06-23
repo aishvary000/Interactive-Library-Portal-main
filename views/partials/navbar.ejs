@@ -21,11 +21,11 @@
                    
                       
                     <a href = "/login" onclick="return loda()" class="nav-item nav-link"><%= name %></a>
-                    <script>
+                    <script type  = "text/javascript">
                         function loda () {
                             var parsed_data = '<%- JSON.stringify(LoggedIn) %>' 
                             console.log(parsed_data)
-                         if(parsed_data)
+                         if(parsed_data.localeCompare("true") == 0)
                          {
                              console.log("looged in")
                              return false;
