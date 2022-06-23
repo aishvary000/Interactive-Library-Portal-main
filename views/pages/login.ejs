@@ -13,14 +13,7 @@
     <link rel ="stylesheet" href="../../public/style.css">
 </head>
 <body>
-    <%- include('../partials/navbar.ejs') %>
-    <!-- <hr> -->
-    <%if (isLoggedIn) { %>
-        <div class="popup-position" id="contact-popup">
-            <%- include('../partials/popup.ejs'); %>
-      </div>
-      <% } %>
-     
+    <%- include('../partials/navbar.ejs',{LoggedIn:LoggedIn,name:name}) %>
     <div class="login-form">
         <form action="/login" method="post">
             <div class="avatar">
