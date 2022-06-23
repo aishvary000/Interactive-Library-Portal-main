@@ -169,6 +169,9 @@ app.get("/borrowingprivileges", (req, res) => {
 app.get("/books", (req, res) => {
   res.render("partials/books.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
+app.get("/ebooks", (req, res) => {
+  res.render("partials/ebooks.ejs",{name:userName});
+});
 app.get("/ill", (req, res) => {
   res.render("partials/ill.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
