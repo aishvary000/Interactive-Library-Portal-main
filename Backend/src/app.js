@@ -13,6 +13,7 @@ const validUsers = require("../src/models/studentsCommomSchema")
 const RegisteredUser = require("../src/models/userSchema")
 const initializePassport = require("../passport_config");
 const MongoStore = require("connect-mongo");
+var isLoggedIn = false;
 var multer = require('multer');
 var userName  = ""
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
@@ -111,12 +112,14 @@ var storage = multer.diskStorage({
 var uploadImage = multer({ storage: storage });
 /**...................................................... */
 app.get("/", (req, res) => {
+ 
   if (req.isAuthenticated) {
     var  toDisplay = ""
     //console.log("Fine")
     if(req.user != null)
     {
       userName = "Welcome, "+req.user[0].Name+" !"
+      isLoggedIn = true;
       console.log("OKAY"+req.user[0].Email)
       toDisplay = "Welcome, "+req.user[0].Name+" !"
     }
@@ -129,9 +132,10 @@ app.get("/", (req, res) => {
       userName = toDisplay
     }
      
-    console.log("anme is : "+toDisplay)
-    res.render("pages/index.ejs", { name: toDisplay});
-  } else res.render("pages/index.ejs",{name:"Login/Register"});
+    console.log("anme is : "+userName)
+    res.locals.name = userName;
+    res.render("pages/index.ejs", { name: userName,LoggedIn:isLoggedIn});
+  } else res.render("pages/index.ejs",{name:"Login/Register",LoggedIn:isLoggedIn});
 
   // res.redirect('../../index')
   //console.log(res.error)
@@ -139,13 +143,14 @@ app.get("/", (req, res) => {
   // app.set('view engine', 'ejs');
 });
 app.get("/researchTools",(req,res)=>{
-  res.render("partials/researchTools.ejs",{name:userName})
+  res.render("partials/researchTools.ejs",{name:userName,LoggedIn:isLoggedIn})
 })
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
   
-  console.log("Getting here")
-  res.render("pages/login.ejs",{name:"Login/Register"});
+  console.log("Getting here i am lgin")
+  console.log("hello " +userName)
+  res.render("pages/login.ejs",{name:userName,LoggedIn:isLoggedIn});
   
  
   // nextTick()
@@ -156,28 +161,28 @@ var success = req.file.filename+"Uploaded Successfully"
 })
 app.get("/userRegisterPage", (req, res) => {
   console.log("Getting here 1")
-  res.render("pages/userRegister.ejs",{name:"Login/Register"});
+  res.render("pages/userRegister.ejs",{name:"Login/Register",LoggedIn:isLoggedIn});
 });
 app.get("/borrowingprivileges", (req, res) => {
-  res.render("partials/borrowingprivileges.ejs",{name:userName});
+  res.render("partials/borrowingprivileges.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
 app.get("/books", (req, res) => {
-  res.render("partials/books.ejs",{name:userName});
+  res.render("partials/books.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
 app.get("/ill", (req, res) => {
-  res.render("partials/ill.ejs",{name:userName});
+  res.render("partials/ill.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
 app.get("/cddvds", (req, res) => {
-  res.render("partials/cddvds.ejs",{name:userName});
+  res.render("partials/cddvds.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
 app.get("/collectionExpanded", (req, res) => {
-  res.render("partials/collectionExpanded.ejs",{name:userName});
+  res.render("partials/collectionExpanded.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
 app.get("/libdatabases", (req, res) => {
-  res.render("partials/libdatabases.ejs",{name:userName});
+  res.render("partials/libdatabases.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
 app.get("/askus", (req, res) => {
-  res.render("partials/askus.ejs",{name:userName});
+  res.render("partials/askus.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
 //registering user
 app.post("/userRegister",async (req, res) => {
@@ -214,7 +219,7 @@ app.post("/userRegister",async (req, res) => {
       });
       const registeredUser = await user.save();
 
-      res.render("pages/login.ejs",{name:"Login/Register"});
+      res.render("pages/login.ejs",{name:"Login/Register",LoggedIn:isLoggedIn});
     // } else {
     //   res.send("Password mismatch");
     // }

@@ -18,14 +18,24 @@
                   </ul>
                   </div>
                 <div class="navbar-nav ms-auto">
-                    <a href="/login" onclick="return checkUser()" class="nav-item nav-link"><%= name %></a>
-                    <script type="text/javascript">
-                        function checkUser () {
-                            console.log("OK I AM HERE")
-                            
+                   
+                      
+                    <a href = "/login" onclick="return loda()" class="nav-item nav-link"><%= name %></a>
+                    <script>
+                        function loda () {
+                            var parsed_data = '<%- JSON.stringify(LoggedIn) %>' 
+                         if(parsed_data)
+                         {
+                             console.log("looged in")
+                             return false;
+                         }
+                         return true;
+                     
+                            //return false;
                             // return true or false, depending on whether you want to allow the `href` property to follow through or not
                         }
                     </script>
+                   
                     <div class="btn-group" id="userMenu" style="display: none;">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           UserName <span class="caret"></span>
