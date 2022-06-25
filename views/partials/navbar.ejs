@@ -23,12 +23,12 @@
                         function loda () {
                             var parsed_data = '<%- JSON.stringify(LoggedIn) %>' 
                             console.log(parsed_data)
-                         if(parsed_data.localeCompare("true") == 0)
-                         {
-                             console.log("looged in")
-                             return false;
-                         }
-                         return true;
+                            if(parsed_data.localeCompare("true") == 0)
+                            {
+                                console.log("looged in")
+                                return false;
+                            }
+                            return true;
                      
                             //return false;
                             // return true or false, depending on whether you want to allow the `href` property to follow through or not
