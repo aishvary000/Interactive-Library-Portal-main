@@ -187,6 +187,9 @@ app.get("/libdatabases", (req, res) => {
 app.get("/askus", (req, res) => {
   res.render("partials/askus.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
+app.get("/reviewinput", (req, res) => {
+  res.render("partials/reviewinput.ejs",{name:userName,LoggedIn:isLoggedIn});
+});
 //registering user
 app.post("/userRegister",async (req, res) => {
   try {
