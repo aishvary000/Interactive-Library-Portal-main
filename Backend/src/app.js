@@ -188,6 +188,9 @@ app.get("/askus", (req, res) => {
 app.get("/reviewinput", (req, res) => {
   res.render("partials/reviewinput.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
+app.get("/userReview",(req,res)=>{
+  res.render("partials/userReview.ejs",{name:userName,LoggedIn:isLoggedIn})
+})
 //registering user
 app.post("/userRegister",async (req, res) => {
   try {

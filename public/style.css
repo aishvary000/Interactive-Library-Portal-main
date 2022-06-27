@@ -447,7 +447,7 @@ text-align: left;
 }
 /* user review */
 #feedback {
-  max-width: 60%;
+  max-width: 80%;
   width: 100%;
   margin: 10px auto;
   padding: 20px;
@@ -599,7 +599,7 @@ select.form-control:focus::-ms-value {
   -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
-  width: 1%;
+  width: 80%;
   margin-bottom: 0;
 }
 
@@ -778,7 +778,7 @@ fieldset[disabled] a.btn {
 /* user review */ 
 
 .user{
-  margin:0;
+  margin-top:5px;
   display: inline-block;
 
 }
