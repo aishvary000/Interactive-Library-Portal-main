@@ -17,7 +17,7 @@ const MongoStore = require("connect-mongo");
 var isLoggedIn = false;
 const multer = require('multer');
 
-var user 
+var user  =  new RegisteredUser()
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 /*connecting to database*************************/
