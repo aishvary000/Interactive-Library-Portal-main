@@ -17,7 +17,7 @@ const MongoStore = require("connect-mongo");
 var isLoggedIn = false;
 const multer = require('multer');
 
-var userName  = ""
+var user 
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 /*connecting to database*************************/
@@ -116,24 +116,26 @@ app.get("/", (req, res) => {
     //console.log("Fine")
     if(req.user != null)
     {
-      userName = "Welcome, "+req.user[0].Name+" !"
+      user = req.user[0]
+      //userName = "Welcome, "+req.user[0].Name+" !"
       isLoggedIn = true;
-      console.log("OKAY"+req.user[0].Email)
-      toDisplay = "Welcome, "+req.user[0].Name+" !"
+      console.log("OKAY"+user.Email)
+      user.Name = "Welcome, "+user.Name+" !"
     }
     // if(req.user != null)
     //   toDisplay = "Welcome "+req.user[0].Email
     else
     {
       isLoggedIn=false
-      toDisplay = "Login/Register"
-      userName = toDisplay
+      user.Name = "Login/Register"
+      //toDisplay = "Login/Register"
+      //userName = toDisplay
     }
      
-    console.log("anme is : "+userName)
-    res.locals.name = userName;
-    res.render("pages/index.ejs", { name: userName,LoggedIn:isLoggedIn});
-  } else res.render("pages/index.ejs",{name:"Login/Register",LoggedIn:isLoggedIn});
+    console.log("anme is : "+user.Name)
+    //res.locals.name = userName;
+    res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn});
+  } else res.render("pages/index.ejs",{User:user,LoggedIn:isLoggedIn});
   // res.render("pages/uploadphoto.ejs")
 
   // res.redirect('../../index')
@@ -145,51 +147,51 @@ app.get("/uploadPhoto",(req,res)=>{
   res.render("pages/uploadphoto.ejs")
 })
 app.get("/researchTools",(req,res)=>{
-  res.render("partials/researchTools.ejs",{name:userName,LoggedIn:isLoggedIn})
+  res.render("partials/researchTools.ejs",{User: user,LoggedIn:isLoggedIn})
 })
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
   
   console.log("Getting here i am lgin")
-  console.log("hello " +userName)
-  res.render("pages/login.ejs",{name:userName,LoggedIn:isLoggedIn});
+  //console.log("hello " +userName)
+  res.render("pages/login.ejs",{User: user,LoggedIn:isLoggedIn});
   
  
   // nextTick()
 });
 app.get("/userRegisterPage", (req, res) => {
   console.log("Getting here 1")
-  res.render("pages/userRegister.ejs",{name:"Login/Register",LoggedIn:isLoggedIn});
+  res.render("pages/userRegister.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/borrowingprivileges", (req, res) => {
-  res.render("partials/borrowingprivileges.ejs",{name:userName,LoggedIn:isLoggedIn});
+  res.render("partials/borrowingprivileges.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/books", (req, res) => {
-  res.render("partials/books.ejs",{name:userName,LoggedIn:isLoggedIn});
+  res.render("partials/books.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/ebooks", (req, res) => {
-  res.render("partials/ebooks.ejs",{name:userName});
+  res.render("partials/ebooks.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/ill", (req, res) => {
-  res.render("partials/ill.ejs",{name:userName,LoggedIn:isLoggedIn});
+  res.render("partials/ill.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/cddvds", (req, res) => {
-  res.render("partials/cddvds.ejs",{name:userName,LoggedIn:isLoggedIn});
+  res.render("partials/cddvds.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/collectionExpanded", (req, res) => {
-  res.render("partials/collectionExpanded.ejs",{name:userName,LoggedIn:isLoggedIn});
+  res.render("partials/collectionExpanded.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/libdatabases", (req, res) => {
-  res.render("partials/libdatabases.ejs",{name:userName,LoggedIn:isLoggedIn});
+  res.render("partials/libdatabases.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/askus", (req, res) => {
-  res.render("partials/askus.ejs",{name:userName,LoggedIn:isLoggedIn});
+  res.render("partials/askus.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/reviewinput", (req, res) => {
-  res.render("partials/reviewinput.ejs",{name:userName,LoggedIn:isLoggedIn});
+  res.render("partials/reviewinput.ejs",{User: user,LoggedIn:isLoggedIn});
 });
 app.get("/userReview",(req,res)=>{
-  res.render("partials/userReview.ejs",{name:userName,LoggedIn:isLoggedIn})
+  res.render("partials/userReview.ejs",{User: user,LoggedIn:isLoggedIn})
 })
 //registering user
 app.post("/userRegister",async (req, res) => {
@@ -228,7 +230,7 @@ app.post("/userRegister",async (req, res) => {
       });
       const registeredUser = await user.save();
 
-      res.render("pages/login.ejs",{name:"Login/Register",LoggedIn:isLoggedIn});
+      res.render("pages/login.ejs",{User: user,LoggedIn:isLoggedIn});
     // } else {
     //   res.send("Password mismatch");
     // }

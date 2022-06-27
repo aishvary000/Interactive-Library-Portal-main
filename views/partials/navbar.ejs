@@ -20,7 +20,7 @@
                 <div class="navbar-nav ms-auto">
                    
                       
-                    <a href = "/login" onclick="return isUserPresent()" class="nav-item nav-link"><%= name %></a>     
+                    <a href = "/login" onclick="return isUserPresent()" class="nav-item nav-link"><%= User.Name %></a>     
                     <script type  = "text/javascript">
                         function isUserPresent () {
                             var parsed_data = '<%- JSON.stringify(LoggedIn) %>' 

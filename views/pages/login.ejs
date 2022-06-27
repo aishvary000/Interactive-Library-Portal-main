@@ -13,7 +13,7 @@
     <link rel ="stylesheet" href="../../public/style.css">
 </head>
 <body>
-    <%- include('../partials/navbar.ejs',{LoggedIn:LoggedIn,name:name}) %>
+    <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
     <div class="login-form">
         <form action="/login" method="post">
             <div class="avatar">
