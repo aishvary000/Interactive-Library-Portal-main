@@ -223,6 +223,7 @@ app.post("/userRegister",async (req, res) => {
         Email: email,
         Password: passwordHash,
         Name: username,
+        Type:"Student"
         //Image:final_img
       });
       const registeredUser = await user.save();
