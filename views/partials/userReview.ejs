@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,75 +6,27 @@
 <body>
     <%- include('../partials/navbar.ejs',{LoggedIn:LoggedIn,name:name}) %>
 
-<script src="https://use.fontawesome.com/a6f0361695.js"></script>
-
-<h2 id="fh2">WE APPRECIATE YOUR REVIEW!</h2>
-<h6 id="fh6">Your review will help us to improve our web hosting quality products, and customer services.</h6>
-
-
-<form id="feedback" action="">
-  <div class="pinfo">Your personal info</div>
-  
-<div class="form-group">
-  <div class="col-md-4 inputGroupContainer">
-  <div class="input-group">
-  <span class="input-group-addon"><i class="fa fa-user"></i></span>
-  <input  name="name" placeholder="John Doe" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="col-md-4 inputGroupContainer">
-  <div class="input-group">
-  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-    <input name="email" type="email" class="form-control" placeholder="john.doe@yahoo.com">
-     </div>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="col-md-4 inputGroupContainer">
-  <div class="input-group">
-  <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-  <input  name="URL" placeholder="https://google.com" class="form-control"  type="url">
-    </div>
-  </div>
-</div>
-
- <div class="pinfo">Rate our overall services.</div>
-  
-
-<div class="form-group">
-  <div class="col-md-4 inputGroupContainer">
-  <div class="input-group">
-  <span class="input-group-addon"><i class="fa fa-heart"></i></span>
-   <select class="form-control" id="rate">
-      <option value="1star">1</option>
-      <option value="2stars">2</option>
-      <option value="3stars">3</option>
-      <option value="4stars">4</option>
-      <option value="5stars">5</option>
-    </select>
-    </div>
-  </div>
-</div>
-
- <div class="pinfo">Write your feedback.</div>
-  
-
-<div class="form-group">
-  <div class="col-md-4 inputGroupContainer">
-  <div class="input-group">
-  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-  <textarea class="form-control" id="review" rows="3"></textarea>
- 
-    </div>
-  </div>
-</div>
-
- <button type="submit" class="btn btn-primary">Submit</button>
-
-
-</form>
+    <form class>
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="First name">
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Last name">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="validationTextarea">Textarea</label>
+        <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+        <div class="invalid-feedback">
+          Please enter a message in the textarea.
+        </div>
+      </div>
+      
 </body>
