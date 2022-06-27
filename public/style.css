@@ -445,3 +445,12 @@ text-align: left;
   width: 300px;
   margin: 70px auto;
 }
+
+.user{
+  margin:0;
+  display: inline-block;
+
+}
+.btn2{
+  float:right;
+}
