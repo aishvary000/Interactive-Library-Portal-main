@@ -454,3 +454,6 @@ text-align: left;
 .btn2{
   float:right;
 }
+.form-control,.btn3,.form-control-file{
+  margin-top: 10px;
+}
