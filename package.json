@@ -17,7 +17,8 @@
     "multer-gridfs-storage": "^5.0.2",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "nodemon": "^2.0.15"
   },
   "name": "interactive-library-portal",
   "description": "Test Link - https://library-portal.netlify.app/",
