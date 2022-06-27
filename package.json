@@ -8,7 +8,11 @@
     "express": "^4.17.3",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
+<<<<<<< HEAD
     "gridfs-stream": "^1.1.1",
+=======
+    "formidable": "^2.0.1",
+>>>>>>> d991b1fc5cbc1c562194d6fb5955056bf24b5672
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.7",
     "mongoose-type-phone": "^1.0.1",
