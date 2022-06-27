@@ -74,10 +74,10 @@ app.set("view engine", "ejs");
 const { nextTick } = require("process");
 app.use(express.static("../../public"));
 //const upload = multer({dest:'uploads'})
-const storage = multer.diskStorage({
-  destination:"uploads",
-  filename:(req.file,cb)
-})
+// const storage = multer.diskStorage({
+//   destination:"uploads",
+//   filename:(req.file,cb)
+// })
 app.use(flash());
 app.use(
   session({
@@ -189,7 +189,7 @@ app.get("/reviewinput", (req, res) => {
   res.render("partials/reviewinput.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
 //registering user
-app.post("/userRegister",upload.single('Image'),async (req, res) => {
+app.post("/userRegister",async (req, res) => {
   try {
     console.log(req.file)
     const password = req.body.password;
