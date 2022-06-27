@@ -7,7 +7,6 @@
 }
 body {
   font-weight: 400;
-  margin: 0;
 }
 .menu{
   font-size: 18px;
@@ -454,15 +453,4 @@ text-align: left;
 }
 .btn2{
   float:right;
-}
-.btn3{
-  margin-top: 10px;
-}
-
-.form-control{
-  margin-top: 10px;
-}
-
-.form-control-file{
-  margin-top: 10px;
 }
