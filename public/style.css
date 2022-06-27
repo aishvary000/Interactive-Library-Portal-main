@@ -776,3 +776,12 @@ fieldset[disabled] a.btn {
   border-color: #01549b;
  }
 /* user review */ 
+
+.user{
+  margin:0;
+  display: inline-block;
+
+}
+.btn2{
+  float:right;
+}
