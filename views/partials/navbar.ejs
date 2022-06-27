@@ -20,9 +20,9 @@
                 <div class="navbar-nav ms-auto">
                    
                       
-                    <a href = "/login" onclick="return loda()" class="nav-item nav-link"><%= name %></a>
+                    <a href = "/login" onclick="return isUserPresent()" class="nav-item nav-link"><%= name %></a>
                     <script type  = "text/javascript">
-                        function loda () {
+                        function isUserPresent () {
                             var parsed_data = '<%- JSON.stringify(LoggedIn) %>' 
                             console.log(parsed_data)
                          if(parsed_data.localeCompare("true") == 0)

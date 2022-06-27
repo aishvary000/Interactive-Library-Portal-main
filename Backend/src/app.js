@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const PORT = process.env.PORT || 5500;
 const SECRET = "MY_SECRET_KEY";
 const passport = require("passport");
+const fs = require("fs")
 const flash = require("express-flash");
 const session = require("express-session");
 const mongoose = require("mongoose");
@@ -14,7 +15,8 @@ const RegisteredUser = require("../src/models/userSchema")
 const initializePassport = require("../passport_config");
 const MongoStore = require("connect-mongo");
 var isLoggedIn = false;
-var multer = require('multer');
+const multer = require('multer');
+
 var userName  = ""
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
@@ -71,6 +73,11 @@ app.set("view engine", "ejs");
 //const userModel = require("../src/models/userSchema");
 const { nextTick } = require("process");
 app.use(express.static("../../public"));
+//const upload = multer({dest:'uploads'})
+const storage = multer.diskStorage({
+  destination:"uploads",
+  filename:(req.file,cb)
+})
 app.use(flash());
 app.use(
   session({
@@ -101,15 +108,6 @@ app.listen(PORT, () => {
 /*setting up multer for image storage */
 
 // SET STORAGE
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '../../public/uploads')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
-  }
-})
-var uploadImage = multer({ storage: storage });
 /**...................................................... */
 app.get("/", (req, res) => {
  
@@ -136,12 +134,16 @@ app.get("/", (req, res) => {
     res.locals.name = userName;
     res.render("pages/index.ejs", { name: userName,LoggedIn:isLoggedIn});
   } else res.render("pages/index.ejs",{name:"Login/Register",LoggedIn:isLoggedIn});
+  // res.render("pages/uploadphoto.ejs")
 
   // res.redirect('../../index')
   //console.log(res.error)
   //res.redirect('../../views/pages/index.ejs')
   // app.set('view engine', 'ejs');
 });
+app.get("/uploadPhoto",(req,res)=>{
+  res.render("pages/uploadphoto.ejs")
+})
 app.get("/researchTools",(req,res)=>{
   res.render("partials/researchTools.ejs",{name:userName,LoggedIn:isLoggedIn})
 })
@@ -155,10 +157,6 @@ app.get("/login", (req, res) => {
  
   // nextTick()
 });
-app.post("/uploadImage",function(req,res,next){
-var success = req.file.filename+"Uploaded Successfully"
-
-})
 app.get("/userRegisterPage", (req, res) => {
   console.log("Getting here 1")
   res.render("pages/userRegister.ejs",{name:"Login/Register",LoggedIn:isLoggedIn});
@@ -188,8 +186,9 @@ app.get("/askus", (req, res) => {
   res.render("partials/askus.ejs",{name:userName,LoggedIn:isLoggedIn});
 });
 //registering user
-app.post("/userRegister",async (req, res) => {
+app.post("/userRegister",upload.single('Image'),async (req, res) => {
   try {
+    console.log(req.file)
     const password = req.body.password;
     const cpassword = req.body.confirmpassword;
     const username = req.body.username;

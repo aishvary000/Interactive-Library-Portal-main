@@ -16,9 +16,11 @@
     "dotenv": "^16.0.0",
     "ejs": "^3.1.8",
     "express": "^4.17.3",
+    "gridfs-stream": "^1.1.1",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.7",
+    "multer-gridfs-storage": "^5.0.2",
     "nodemon": "^2.0.15"
   }
 }

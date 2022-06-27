@@ -14,11 +14,11 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    // Image:
-    // {
-    //     data: Buffer,
-    //     contentType: String
-    // }
+    Image:
+    {
+        data: Buffer,
+        contentType: String
+    }
 })
 
 const RegisteredUser = new mongoose.model("RegisteredUser",userSchema,"registeredUser")
