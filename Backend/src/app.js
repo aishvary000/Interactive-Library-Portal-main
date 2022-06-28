@@ -194,59 +194,9 @@ app.get("/reviewinput", (req, res) => {
 app.get("/userReview",(req,res)=>{
   res.render("partials/userReview.ejs",{User: user,LoggedIn:isLoggedIn})
 })
-app.post("/userRegisterTry",async (req, res) => {
-  try {
-    console.log(req.file)
-    const password = req.body.password;
-    const cpassword = req.body.confirmpassword;
-    const username = req.body.username;
-    const email = req.body.email;
-    console.log("Email is : "+email);
-    const user1 = await isValid(email);
-    // var img = fs.readFileSync(req.file.path);
-    // var encode_img = img.toString('base64');
-    // var final_img = {
-    //     contentType:req.file.mimetype,
-    //     image:new Buffer(encode_img,'base64')
-    // };
-    console.log("hello")
-    if(user1)
-    {
-      console.log("User is present");
-      var existingUser = await RegisteredUser.findOne({ Email: email });
-      if (existingUser)
-        return res
-          .status(400)
-          .json({ msg: "An account with this email already exists." });
-      console.log("YEPE")
-      const salt = await bcrypt.genSalt();
-      const passwordHash = await bcrypt.hash(password, salt);
-      const user = new RegisteredUser({
-        Email: email,
-        Password: passwordHash,
-        Name: username,
-        Type:"Student"
-        //Image:final_img
-      });
-      const registeredUser = await user.save();
-
-      res.render("pages/login.ejs",{User: user,LoggedIn:isLoggedIn});
-    // } else {
-    //   res.send("Password mismatch");
-    // }
-  }
-  else
-  {
-    return res
-          .status(400)
-          .json({ msg: "Sorry only organization emails are allowed." });
-  }
-} 
-  catch (error) {
-    res.status(400).send(error);
-  }
-});
-
+app.get("/facultypublications",(req,res)=>{
+  res.render("partials/facultypublications.ejs",{User: user,LoggedIn:isLoggedIn})
+})
 //registering user
 app.post("/userRegister",async (req, res) => {
   try {
