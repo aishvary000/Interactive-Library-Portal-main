@@ -194,6 +194,9 @@ app.get("/reviewinput", (req, res) => {
 app.get("/userReview",(req,res)=>{
   res.render("partials/userReview.ejs",{User: user,LoggedIn:isLoggedIn})
 })
+app.get("/facultypublications",(req,res)=>{
+  res.render("partials/facultypublications.ejs",{User: user,LoggedIn:isLoggedIn})
+})
 //registering user
 app.post("/userRegister",async (req, res) => {
   try {
