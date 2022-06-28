@@ -6,9 +6,10 @@
 <body>
   <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
   <div class="container py-3">
+    <form action="/userReview" method="post" enctype="multipart/form-data"
+    >
     <div class="row">
-      
-        
+     
           <div class="row justify-content-center">
             <div class="col-md-12">
               <span class="anchor" id="formUserEdit"></span>
@@ -23,36 +24,36 @@
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label">First name</label>
                       <div class="col-lg-9">
-                        <input class="form-control" type="text" value="First Name">
+                        <input class="form-control" name = "firstName" type="text" value="First Name">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                       <div class="col-lg-9">
-                        <input class="form-control" type="text" value="Last Name">
+                        <input class="form-control" name = "lastName" type="text" value="Last Name">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label">Email</label>
                       <div class="col-lg-9">
-                        <input class="form-control" type="email" value="Enter your Email">
+                        <input class="form-control" name = "email" type="email" value="Enter your Email">
                       </div>
                     </div>
                     
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label">Give your Feedback</label>
                       <div class="col-lg-9">
-                        <textarea class="form-control" id="message2" name="message2" required="" rows="6"></textarea>
+                        <textarea class="form-control" id="Feedback" name="feedback" rows="6"></textarea>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="exampleFormControlFile1" class="col-lg-3 col-form-label form-control-label" >Example file input</label>
-                      <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                      <input type="file" name="image" class="form-control-file" id="image">
                     </div>
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label"></label>
                       <div class="col-lg-9">
-                        <a href="#" class="btn3 btn btn-primary" >Save Changes</a>
+                        <button type="submit" class="btn3 btn btn-primary" >Save Changes</a>
                         <a href="/" class="btn3 btn btn-secondary" >Cancel</a>
 
                       </div>
@@ -63,6 +64,7 @@
             </div>
           </div>
         </div>
+        </form>
       </div>
       <%- include('../partials/footer.ejs') %>
 </body>

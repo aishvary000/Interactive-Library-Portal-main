@@ -12,6 +12,7 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const validUsers = require("../src/models/studentsCommomSchema")
 const RegisteredUser = require("../src/models/userSchema")
+const Reviews = require("../src/models/review")
 const initializePassport = require("../passport_config");
 const MongoStore = require("connect-mongo");
 var isLoggedIn = false;
@@ -72,12 +73,37 @@ app.set("view engine", "ejs");
 
 //const userModel = require("../src/models/userSchema");
 const { nextTick } = require("process");
+const review = require("../src/models/review");
 app.use(express.static("../../public"));
 //const upload = multer({dest:'uploads'})
 // const storage = multer.diskStorage({
 //   destination:"uploads",
 //   filename:(req.file,cb)
 // })
+
+/*defining storage for multer*/
+const storageUserReviews = multer.diskStorage({
+  
+  destination:function (request,file,callback){
+    callback(null,'uploads/userReviews/')
+  },
+
+  //add back the extension
+  filename:function (request,file,callback){
+    callback(null,Date.now()+file.originalname)
+  }
+
+})
+/*upload parameters for multer*/
+const uploadUserReviews = multer({
+  storage:storageUserReviews
+
+})
+
+
+
+
+
 app.use(flash());
 app.use(
   session({
@@ -197,6 +223,57 @@ app.get("/userReview",(req,res)=>{
 app.get("/facultypublications",(req,res)=>{
   res.render("partials/facultypublications.ejs",{User: user,LoggedIn:isLoggedIn})
 })
+app.post("/userReview",uploadUserReviews.single('image'),async (req, res) => {
+  try {
+    console.log(req.file)
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName
+    const email = req.body.email;
+    const feedback = req.body.feedback;
+    console.log("Feed back : "+feedback)
+    const rev = new review({
+      firstName:firstName,
+      lastName:lastName,
+      email:email,
+      feedback:feedback,
+      image:req.file.filename
+
+    })
+
+    const savedrev = await rev.save();
+    if (req.isAuthenticated) {
+      var  toDisplay = ""
+      //console.log("Fine")
+      if(req.user != null)
+      {
+        user = req.user[0]
+        //userName = "Welcome, "+req.user[0].Name+" !"
+        isLoggedIn = true;
+        console.log("OKAY"+user.Email)
+        user.Name = "Welcome, "+user.Name+" !"
+      }
+      // if(req.user != null)
+      //   toDisplay = "Welcome "+req.user[0].Email
+      else
+      {
+        isLoggedIn=false
+        user.Name = "Login/Register"
+        //toDisplay = "Login/Register"
+        //userName = toDisplay
+      }
+    console.log("user : "+user.Name)
+    res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn});
+    
+}else{
+  isLoggedIn=false;
+  user.Name = "Login/Register"
+  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn});
+}
+  }
+  catch (error) {
+    res.status(400).send(error);
+  }
+});
 //registering user
 app.post("/userRegister",async (req, res) => {
   try {
