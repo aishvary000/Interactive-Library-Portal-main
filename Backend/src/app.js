@@ -86,7 +86,7 @@ app.use(express.static("../../public"));
 const storageUserReviews = multer.diskStorage({
   
   destination:function (request,file,callback){
-    callback(null,'uploads/userReviews/')
+    callback(null,path.join(__dirname+'uploads/userReviews/'))
   },
 
   //add back the extension
@@ -146,8 +146,9 @@ app.get("/", (req, res) => {
       user = req.user[0]
       //userName = "Welcome, "+req.user[0].Name+" !"
       isLoggedIn = true;
-      console.log("OKAY"+user.Email)
-      user.Name = "Welcome, "+user.Name+" !"
+      var FacultyPublications = getFacultyPublications()
+      //console.log("OKAY"+user.Email)
+     /// user.Name = "Welcome, "+user.Name+" !"
     }
     // if(req.user != null)
     //   toDisplay = "Welcome "+req.user[0].Email
@@ -158,8 +159,7 @@ app.get("/", (req, res) => {
       //toDisplay = "Login/Register"
       //userName = toDisplay
     }
-     
-    console.log("anme is : "+user.Name)
+    
     //res.locals.name = userName;
     res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn});
   } else res.render("pages/index.ejs",{User:user,LoggedIn:isLoggedIn});
@@ -376,25 +376,21 @@ function setUser(req)
 
   if (req.isAuthenticated) {
     
-    //console.log("Fine")
+   
     if(req.user != null)
     {
       user = req.user[0]
-      //userName = "Welcome, "+req.user[0].Name+" !"
       isLoggedIn = true;
       console.log("OKAY"+user.Email)
       user.Name = "Welcome, "+user.Name+" !"
     }
-    // if(req.user != null)
-    //   toDisplay = "Welcome "+req.user[0].Email
     else
     {
       isLoggedIn=false
       user.Name = "Login/Register"
-      //toDisplay = "Login/Register"
-      //userName = toDisplay
+     
     }
- // console.log("user : "+user.Name)
+
   
   
 }else{
