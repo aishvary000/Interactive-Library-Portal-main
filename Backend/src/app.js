@@ -144,11 +144,11 @@ app.get("/", (req, res) => {
     if(req.user != null)
     {
       user = req.user[0]
-      //userName = "Welcome, "+req.user[0].Name+" !"
+     // userName = "Welcome, "+req.user[0].Name+" !"
       isLoggedIn = true;
       //var FacultyPublications = getFacultyPublications()
       //console.log("OKAY"+user.Email)
-     /// user.Name = "Welcome, "+user.Name+" !"
+     user.Name = "Welcome, "+user.Name+" !"
     }
     // if(req.user != null)
     //   toDisplay = "Welcome "+req.user[0].Email
