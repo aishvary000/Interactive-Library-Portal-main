@@ -66,16 +66,55 @@
       <div class="container-fluid cards">
         <div class="row">
           <div class="col-md-4">
+          <div class="card" style="height:19rem">
+            
+            <table class="card-table table">
+              <thead>
+                <tr>
+                  <th  scope="col">Author</th>
+                  <th  scope="col">Title</th>
+                  <th scope=""col">Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  
+                </tr>
+                <tr>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                </tr>
+                <tr>
+                  <td >Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+                <tr>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  
+                </tr>
+                
+              </tbody>
+            </table>
+            <div class="card-body">
+              <h5 class="card-title user">Faculty Publications</h5>
+              <% if(LoggedIn && User.Type == "Admin"){ %>
+                <a href="/userReview" class=" btn2 btn btn-primary stretched-link ml-auto">Add Publications</a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+          <!-- <div class="col-md-4">
             <div class="card">
               <img class="card-img-top" src="./images/image1.jpg" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title user">Faculty Publications</h5>
-                <% if(LoggedIn && User.Type == "Admin"){ %>
-                  <a href="/facultypublications" class=" btn2 btn btn-primary stretched-link ml-auto">Add Publications</a>
-                <% } %>
+                
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="col-md-4">
             <div class="card">
               <img class="card-img-top" src="./images/image2.jpg" alt="Card image cap">
