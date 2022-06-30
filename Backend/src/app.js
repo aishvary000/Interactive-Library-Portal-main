@@ -146,7 +146,7 @@ app.get("/", (req, res) => {
       user = req.user[0]
       //userName = "Welcome, "+req.user[0].Name+" !"
       isLoggedIn = true;
-      var FacultyPublications = getFacultyPublications()
+      //var FacultyPublications = getFacultyPublications()
       //console.log("OKAY"+user.Email)
      /// user.Name = "Welcome, "+user.Name+" !"
     }
