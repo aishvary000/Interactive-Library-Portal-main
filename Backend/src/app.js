@@ -13,6 +13,7 @@ const mongoose = require("mongoose");
 const validUsers = require("../src/models/studentsCommomSchema")
 const RegisteredUser = require("../src/models/userSchema")
 const Reviews = require("../src/models/review")
+const FacultyPublication = require("../src/models/facultyPublication")
 const initializePassport = require("../passport_config");
 const MongoStore = require("connect-mongo");
 var isLoggedIn = false;
@@ -223,6 +224,28 @@ app.get("/userReview",(req,res)=>{
 app.get("/facultypublications",(req,res)=>{
   res.render("partials/facultypublications.ejs",{User: user,LoggedIn:isLoggedIn})
 })
+app.post("/facultyPublication",async (req,res)=>{
+
+  const facultyName = req.body.facultyName;
+  const title = req.body.title;
+  const link = req.body.link;
+  const fp = new FacultyPublication({
+    facultyName:facultyName,
+    titleOfPublication:title,
+    link:link
+
+
+  })
+  const fps = await fp.save()
+  setUser(req)
+  console.log("OKAY"+user.Email)
+  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn});
+
+
+
+
+
+})
 app.post("/userReview",uploadUserReviews.single('image'),async (req, res) => {
   try {
     console.log(req.file)
@@ -242,7 +265,7 @@ app.post("/userReview",uploadUserReviews.single('image'),async (req, res) => {
 
     const savedrev = await rev.save();
     if (req.isAuthenticated) {
-      var  toDisplay = ""
+    
       //console.log("Fine")
       if(req.user != null)
       {
@@ -347,6 +370,43 @@ async function isValid(email)
   
 
 }
+function setUser(req)
+{
+
+
+  if (req.isAuthenticated) {
+    
+    //console.log("Fine")
+    if(req.user != null)
+    {
+      user = req.user[0]
+      //userName = "Welcome, "+req.user[0].Name+" !"
+      isLoggedIn = true;
+      console.log("OKAY"+user.Email)
+      user.Name = "Welcome, "+user.Name+" !"
+    }
+    // if(req.user != null)
+    //   toDisplay = "Welcome "+req.user[0].Email
+    else
+    {
+      isLoggedIn=false
+      user.Name = "Login/Register"
+      //toDisplay = "Login/Register"
+      //userName = toDisplay
+    }
+ // console.log("user : "+user.Name)
+  
+  
+}else{
+isLoggedIn=false;
+user.Name = "Login/Register"
+//res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn});
+}
+
+
+
+}
+
 // function checkAuthenticated(req,res,next)
 // {
 //   if(res.isAuthenticated())
