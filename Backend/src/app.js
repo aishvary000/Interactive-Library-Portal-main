@@ -231,7 +231,7 @@ app.post("/userReview",uploadUserReviews.single('image'),async (req, res) => {
     const email = req.body.email;
     const feedback = req.body.feedback;
     console.log("Feed back : "+feedback)
-    const rev = new review({
+    const rev = new Reviews({
       firstName:firstName,
       lastName:lastName,
       email:email,
