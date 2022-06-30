@@ -86,7 +86,8 @@ app.use(express.static("../../public"));
 const storageUserReviews = multer.diskStorage({
   
   destination:function (request,file,callback){
-    callback(null,path.join(__dirname,'../uploads/userReviews/'))
+    console.log(__dirname)
+    callback(null,'/uploads')
   },
 
   //add back the extension
