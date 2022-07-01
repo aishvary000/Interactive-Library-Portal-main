@@ -87,7 +87,7 @@ const storageUserReviews = multer.diskStorage({
   
   destination:function (request,file,callback){
     console.log(__dirname)
-    callback(null,path.join(__dirname,"../../public"))
+    callback(null,path.join(__dirname,"../../public/images/userReviews"))
   },
 
   //add back the extension
