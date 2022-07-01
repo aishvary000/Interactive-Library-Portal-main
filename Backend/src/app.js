@@ -242,7 +242,7 @@ app.post("/facultyPublication",async (req,res)=>{
   })
   const fps = await fp.save()
   setUser(req)
-  var fp1 = await getFacultyPublications()
+  var fp1 = await FacultyPublication.find()
   console.log("OKAY"+user.Email)
   res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublication:fp1});
 
