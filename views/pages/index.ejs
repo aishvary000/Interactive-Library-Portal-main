@@ -77,7 +77,13 @@
                 </tr>
               </thead>
               <tbody>
-                
+                  <% FacultyPublications.forEach(function (practice,idx) {%>  
+                  <tr>
+                   
+                    <td><%= practice.facultyName%></td>
+                    <td><%= practice.titleOfPublication%></td>
+                  </tr>
+                  <% })%>
               </tbody>
             </table>
             <div class="card-body">

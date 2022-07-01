@@ -137,17 +137,20 @@ app.listen(PORT, () => {
 
 // SET STORAGE
 /**...................................................... */
-app.get("/", (req, res) => {
- 
+app.get("/", async (req, res) => {
+  var facultyPublications = new Array()
   if (req.isAuthenticated) {
     var  toDisplay = ""
+   
     //console.log("Fine")
     if(req.user != null)
     {
       user = req.user[0]
-     // userName = "Welcome, "+req.user[0].Name+" !"
+      facultyPublications = await FacultyPublication.find();
+      //console.log(facultyPublications)
+      userName = "Welcome, "+req.user[0].Name+" !"
       isLoggedIn = true;
-      //var FacultyPublications = getFacultyPublications()
+      //FacultyPublications = getFacultyPublications()
       //console.log("OKAY"+user.Email)
      user.Name = "Welcome, "+user.Name+" !"
     }
@@ -162,8 +165,8 @@ app.get("/", (req, res) => {
     }
     
     //res.locals.name = userName;
-    res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn});
-  } else res.render("pages/index.ejs",{User:user,LoggedIn:isLoggedIn});
+    res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:facultyPublications});
+  } else res.render("pages/index.ejs",{User:user,LoggedIn:isLoggedIn,FacultyPublications:facultyPublications});
   // res.render("pages/uploadphoto.ejs")
 
   // res.redirect('../../index')
@@ -239,8 +242,9 @@ app.post("/facultyPublication",async (req,res)=>{
   })
   const fps = await fp.save()
   setUser(req)
+  var fp1 = await getFacultyPublications()
   console.log("OKAY"+user.Email)
-  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn});
+  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublication:fp1});
 
 
 
@@ -369,6 +373,21 @@ async function isValid(email)
   const user = await validUsers.findOne({EMAIL:email})
   return user
   
+
+}
+async function getFacultyPublications()
+{
+  var list  = []
+  FacultyPublication.find({},function(err,data){
+    data.forEach(function(item,index){
+     // console.log(data)
+      list.push(data)
+    })
+    //console.log(list.length)
+    return list;
+  })
+
+
 
 }
 function setUser(req)
