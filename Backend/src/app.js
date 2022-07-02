@@ -244,7 +244,7 @@ app.post("/facultyPublication",async (req,res)=>{
   setUser(req)
   var fp1 = await FacultyPublication.find()
   console.log("OKAY"+user.Email)
-  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublication:fp1});
+  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
 
 
 
