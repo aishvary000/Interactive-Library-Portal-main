@@ -445,7 +445,10 @@ text-align: left;
   width: 300px;
   margin: 70px auto;
 }
-
+.user1{
+  margin-top:8px;
+  display: inline-block;
+}
 .user{
   margin-top:5px;
   display: inline-block;
