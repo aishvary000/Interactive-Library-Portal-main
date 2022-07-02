@@ -13,7 +13,8 @@ const facultyPublicationSchema = new mongoose.Schema({
     link:{
         type:String,
         required:true
-    }
+    },
+    created_at: {type: Date, default: Date.now}
 })
 
 const facultyPublication = new mongoose.model("facultyPublication",facultyPublicationSchema,"facultyPublications")

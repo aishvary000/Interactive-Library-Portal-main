@@ -146,8 +146,8 @@ app.get("/", async (req, res) => {
     if(req.user != null)
     {
       user = req.user[0]
-      facultyPublications = await FacultyPublication.find();
-      //console.log(facultyPublications)
+      facultyPublications = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
+      console.log(facultyPublications)
       userName = "Welcome, "+req.user[0].Name+" !"
       isLoggedIn = true;
       //FacultyPublications = getFacultyPublications()
@@ -242,7 +242,7 @@ app.post("/facultyPublication",async (req,res)=>{
   })
   const fps = await fp.save()
   setUser(req)
-  var fp1 = await FacultyPublication.find()
+  var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
   console.log("OKAY"+user.Email)
   res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
 
