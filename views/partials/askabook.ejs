@@ -6,7 +6,7 @@
 <body>
   <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
   <div class="container py-3">
-    <form action="/bookNotFound" method="post" enctype="form-data"
+    <form action="/askABook" method="post" enctype="form-data"
     >
     <div class="row">
      
@@ -17,12 +17,12 @@
               <!-- form user info -->
               <div class="card card-outline-secondary">
                 <div class="card-header text-center">
-                  <h3 class="mb-0">Book Not Found</h3>
+                  <h3 class="mb-0">Ask For A Book</h3>
                 </div>
                 <div class="card-body">
                   <form autocomplete="off" class="form" role="form">
                     <div class="form-group row">
-                      <label class="col-lg-3 col-form-label form-control-label">Name of The Book</label>
+                      <label class="col-lg-3 col-form-label form-control-label">Book Name</label>
                       <div class="col-lg-9">
                         <input class="form-control" name = "title" type="text" placeholder="Title">
                       </div>
@@ -30,15 +30,28 @@
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label">Author</label>
                       <div class="col-lg-9">
-                        <input class="form-control" name = "author" type="text" placeholder="Author">
+                        <input class="form-control" name = "author" type="text" placeholder="Name of Author">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-lg-3 col-form-label form-control-label">Accession Number</label>
-                      <div class="col-lg-9">
-                        <input class="form-control" name = "accessionNumber" type="text" placeholder="Enter your Accession Number">
+                        <label class="col-lg-3 col-form-label form-control-label">Edition</label>
+                        <div class="col-lg-9">
+                          <input class="form-control" name = "author" type="text" placeholder="Edition of The Book">
+                        </div>
                       </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Publisher</label>
+                        <div class="col-lg-9">
+                          <input class="form-control" name = "author" type="text" placeholder="Name of Publisher">
+                        </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Year Published</label>
+                        <div class="col-lg-9">
+                          <input class="form-control" name = "author" type="text" placeholder="Publishing Year">
+                        </div>
+                    </div>
+                    
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label"></label>
                         <div class="col-lg-9">
