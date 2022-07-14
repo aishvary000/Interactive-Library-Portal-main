@@ -14,6 +14,7 @@ const validUsers = require("../src/models/studentsCommomSchema")
 const bookNotFound = require("../src/models/bookNotFound")
 const bookRecommend = require("../src/models/bookRecommend")
 const databaseNotFound = require("../src/models/databaseNotFound")
+const compliment = require("../src/models/compliments")
 const complaintAndGrievance = require("../src/models/complaintAndGrievance")
 const RegisteredUser = require("../src/models/userSchema")
 const Reviews = require("../src/models/review")
@@ -229,6 +230,9 @@ app.get("/askus", (req, res) => {
 app.get("/reviewinput", (req, res) => {
   res.render("partials/reviewinput.ejs",{User: user,LoggedIn:isLoggedIn});
 });
+app.get("/compliments", (req, res) => {
+  res.render("partials/compliments.ejs",{User: user,LoggedIn:isLoggedIn});
+});
 app.get("/userReview",(req,res)=>{
   res.render("partials/userReview.ejs",{User: user,LoggedIn:isLoggedIn})
 })
@@ -240,6 +244,9 @@ app.get("/complaints",(req,res)=>{
 })
 app.get("/facultypublications",(req,res)=>{
   res.render("partials/facultypublications.ejs",{User: user,LoggedIn:isLoggedIn})
+})
+app.get("/askAbook",(req,res)=>{
+  res.render("partials/askabook.ejs",{User: user,LoggedIn:isLoggedIn})
 })
 app.post("/facultyPublication",async (req,res)=>{
 
@@ -257,6 +264,52 @@ app.post("/facultyPublication",async (req,res)=>{
   setUser(req)
   var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
   console.log("OKAY"+user.Email)
+  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
+
+
+
+
+
+})
+app.post("/askAbook",async (req,res)=>{
+
+  const title = req.body.title;
+  const author = req.body.author;
+  const publisher = req.body.publisher
+  const year = req.body.year
+  const edition = req.body.edition
+  const bookRecommende = new bookRecommend({
+    title:title,
+    author:author,
+    publisher:publisher,
+    year:year,
+    edition:edition
+
+
+  })
+  const brs = await bookRecommende.save()
+  setUser(req)
+  var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
+  //console.log("OKAY"+user.Email)
+  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
+
+
+
+
+
+})
+app.post("/compliments",async (req,res)=>{
+
+  const explanation = req.body.explanation;
+  const complimente = new compliment({
+    explanation:explanation
+
+
+  })
+  const cs = await complimente.save()
+  setUser(req)
+  var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
+  //console.log("OKAY"+user.Email)
   res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
 
 
