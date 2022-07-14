@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 
 const databaseNotFoundSchema = new mongoose.Schema({
     
-    Name:{
+    Database_Name:{
         type:String,
         required:true
     },
-    title:{
+    Journal_title:{
         type:String,
         required:true
     },

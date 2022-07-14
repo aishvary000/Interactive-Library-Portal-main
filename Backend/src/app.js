@@ -181,6 +181,9 @@ app.get("/", async (req, res) => {
 app.get("/uploadPhoto",(req,res)=>{
   res.render("pages/uploadphoto.ejs")
 })
+app.get("/databaseNotFound",(req,res)=>{
+  res.render("partials/databasenotfound",{User: user,LoggedIn:isLoggedIn})
+})
 app.get("/researchTools",(req,res)=>{
   res.render("partials/researchTools.ejs",{User: user,LoggedIn:isLoggedIn})
 })
@@ -254,6 +257,29 @@ app.post("/facultyPublication",async (req,res)=>{
   setUser(req)
   var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
   console.log("OKAY"+user.Email)
+  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
+
+
+
+
+
+})
+app.post("/databaseNotFound",async (req,res)=>{
+
+  const name = req.body.name;
+  const title = req.body.title;
+  const location = req.body.location;
+  const databaseNotFoundSave = new databaseNotFound({
+    Database_Name:name,
+    Journal_title:title,
+    location:location
+
+
+  })
+  const dnfs = await databaseNotFoundSave.save()
+  setUser(req)
+  var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
+  //console.log("OKAY"+user.Email)
   res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
 
 
