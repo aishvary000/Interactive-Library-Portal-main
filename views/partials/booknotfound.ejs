@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/headers.ejs') %>
+</head>
+<body>
+  <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
+  <div class="container py-3">
+    <form action="/userReview" method="post" enctype="multipart/form-data"
+    >
+    <div class="row">
+     
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <span class="anchor" id="formUserEdit"></span>
+              
+              <!-- form user info -->
+              <div class="card card-outline-secondary">
+                <div class="card-header text-center">
+                  <h3 class="mb-0">User Review</h3>
+                </div>
+                <div class="card-body">
+                  <form autocomplete="off" class="form" role="form">
+                    <div class="form-group row">
+                      <label class="col-lg-3 col-form-label form-control-label">Name of The Book</label>
+                      <div class="col-lg-9">
+                        <input class="form-control" name = "firstName" type="text" placeholder="Book Name">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-3 col-form-label form-control-label">Title</label>
+                      <div class="col-lg-9">
+                        <input class="form-control" name = "lastName" type="text" placeholder="Title">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                      <div class="col-lg-9">
+                        <input class="form-control" name = "email" type="text" placeholder="Enter your Accession Number">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                        <div class="col-lg-9">
+                          <button type="submit" class="btn3 btn btn-primary" >Save Changes</button>
+                          <button href = "/" class="btn3 btn btn-secondary" >Cancel</button>
+  
+                        </div>
+                      </div>
+                    
+                  </form>
+                </div>
+              </div><!-- /form user info -->
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+      <%- include('../partials/footer.ejs') %>
+</body>
+</html>
