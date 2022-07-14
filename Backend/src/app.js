@@ -284,6 +284,28 @@ app.post("/bookNotFound",async (req,res)=>{
 
 
 })
+app.post("/complaints",async (req,res)=>{
+
+  const Name = req.body.inlineRadioOptions
+  const explanation = req.body.explanation
+  const complaintAndGrievancee = new complaintAndGrievance({
+    Name:Name,
+    explanation:explanation,
+    
+
+
+  })
+  const cags = await complaintAndGrievancee.save()
+  setUser(req)
+  var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
+  //console.log("OKAY"+user.Email)
+  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
+
+
+
+
+
+})
 app.post("/userReview",uploadUserReviews.single('image'),async (req, res) => {
   try {
     console.log(req.file)
