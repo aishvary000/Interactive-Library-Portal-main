@@ -229,6 +229,12 @@ app.get("/reviewinput", (req, res) => {
 app.get("/userReview",(req,res)=>{
   res.render("partials/userReview.ejs",{User: user,LoggedIn:isLoggedIn})
 })
+app.get("/bookNotFound",(req,res)=>{
+  res.render("partials/booknotfound.ejs",{User: user,LoggedIn:isLoggedIn})
+})
+app.get("/complaints",(req,res)=>{
+  res.render("partials/complaints.ejs",{User: user,LoggedIn:isLoggedIn})
+})
 app.get("/facultypublications",(req,res)=>{
   res.render("partials/facultypublications.ejs",{User: user,LoggedIn:isLoggedIn})
 })
@@ -248,6 +254,29 @@ app.post("/facultyPublication",async (req,res)=>{
   setUser(req)
   var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
   console.log("OKAY"+user.Email)
+  res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
+
+
+
+
+
+})
+app.post("/bookNotFound",async (req,res)=>{
+
+  const title = req.body.title;
+  const author = req.body.author;
+  const accessionNumber = req.body.accessionNumber;
+  const bookNotFoundSave = new bookNotFound({
+    title:title,
+    author:author,
+    accessionNumber:accessionNumber
+
+
+  })
+  const bnfs = await bookNotFoundSave.save()
+  setUser(req)
+  var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
+  //console.log("OKAY"+user.Email)
   res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn,FacultyPublications:fp1});
 
 

@@ -6,7 +6,7 @@
 <body>
   <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
   <div class="container py-3">
-    <form action="/userReview" method="post" enctype="multipart/form-data"
+    <form action="/bookNotFound" method="post" enctype="form-data"
     >
     <div class="row">
      
@@ -24,19 +24,19 @@
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label">Name of The Book</label>
                       <div class="col-lg-9">
-                        <input class="form-control" name = "firstName" type="text" placeholder="Book Name">
+                        <input class="form-control" name = "title" type="text" placeholder="Title">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-lg-3 col-form-label form-control-label">Title</label>
+                      <label class="col-lg-3 col-form-label form-control-label">Author</label>
                       <div class="col-lg-9">
-                        <input class="form-control" name = "lastName" type="text" placeholder="Title">
+                        <input class="form-control" name = "author" type="text" placeholder="Author">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                      <label class="col-lg-3 col-form-label form-control-label">Accession Number</label>
                       <div class="col-lg-9">
-                        <input class="form-control" name = "email" type="text" placeholder="Enter your Accession Number">
+                        <input class="form-control" name = "accessionNumber" type="text" placeholder="Enter your Accession Number">
                       </div>
                     </div>
                     <div class="form-group row">
