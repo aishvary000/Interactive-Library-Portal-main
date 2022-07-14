@@ -454,6 +454,10 @@ text-align: left;
   display: inline-block;
 
 }
+.radio{
+  padding-top:7px;
+  padding-bottom:7px;
+}
 .btn2{
   float:right;
 }
