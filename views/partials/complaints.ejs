@@ -6,7 +6,7 @@
 <body>
   <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
   <div class="container py-3">
-    <form action="/complaints" method="post" enctype="multipart/form-data"
+    <form action="/complaints" method="post" enctype="form-data"
     >
     <div class="row">
      
@@ -21,22 +21,28 @@
                 </div>
                 <div class="card-body">
                   <form autocomplete="off" class="form" role="form">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                        <label class="form-check-label" for="inlineRadio1">Internet Facility</label>
+                    <div class="form-group row">
+                      <label class="col-lg-3 col-form-label form-control-label"><strong>Select The Issue</strong></label>
+                      <div class="col-lg-9 radio">
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                          <label class="form-check-label" for="inlineRadio1">Internet Facility</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                          <label class="form-check-label" for="inlineRadio2">Help Desk</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                          <label class="form-check-label" for="inlineRadio3">Photocopy</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                          <label class="form-check-label" for="inlineRadio4">Reference</label>
+                        </div>
                       </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                        <label class="form-check-label" for="inlineRadio2">Help Desk</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                        <label class="form-check-label" for="inlineRadio3">Photocopy</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
-                        <label class="form-check-label" for="inlineRadio4">Reference</label>
-                      </div>
+                    </div>
+                    
                     <div class="form-group row">
                       <label class="col-lg-3 col-form-label form-control-label">State your Complaints</label>
                       <div class="col-lg-9">
