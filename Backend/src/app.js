@@ -11,6 +11,10 @@ const flash = require("express-flash");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const validUsers = require("../src/models/studentsCommomSchema")
+const bookNotFound = require("../src/models/bookNotFound")
+const bookRecommend = require("../src/models/bookRecommend")
+const databaseNotFound = require("../src/models/databaseNotFound")
+const complaintAndGrievance = require("../src/models/complaintAndGrievance")
 const RegisteredUser = require("../src/models/userSchema")
 const Reviews = require("../src/models/review")
 const FacultyPublication = require("../src/models/facultyPublication")
@@ -141,12 +145,12 @@ app.get("/", async (req, res) => {
   var facultyPublications = new Array()
   if (req.isAuthenticated) {
     var  toDisplay = ""
-   
+    facultyPublications = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
+
     //console.log("Fine")
     if(req.user != null)
     {
       user = req.user[0]
-      facultyPublications = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
       console.log(facultyPublications)
       userName = "Welcome, "+req.user[0].Name+" !"
       isLoggedIn = true;
