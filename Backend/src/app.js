@@ -286,17 +286,16 @@ app.post("/bookNotFound",async (req,res)=>{
 })
 app.post("/complaints",async (req,res)=>{
 
-  const title = req.body.title;
-  const author = req.body.author;
-  const accessionNumber = req.body.accessionNumber;
-  const bookNotFoundSave = new bookNotFound({
-    Name:title,
-    explanation:author,
+  const Name = req.body.inlineRadioOptions
+  const explanation = req.body.explanation
+  const complaintAndGrievancee = new complaintAndGrievance({
+    Name:Name,
+    explanation:explanation,
     
 
 
   })
-  const bnfs = await bookNotFoundSave.save()
+  const cags = await complaintAndGrievancee.save()
   setUser(req)
   var fp1 = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
   //console.log("OKAY"+user.Email)
