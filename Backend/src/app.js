@@ -148,7 +148,7 @@ app.get("/", async (req, res) => {
     var  toDisplay = ""
     facultyPublications = await FacultyPublication.find().sort({'created_at':-1}).limit(4);
 
-    //console.log("Fine")
+    console.log("Fine")
     if(req.user != null)
     {
       user = req.user[0]
