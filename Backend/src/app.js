@@ -16,6 +16,8 @@ const bookRecommend = require("../src/models/bookRecommend");
 const databaseNotFound = require("../src/models/databaseNotFound");
 const compliment = require("../src/models/compliments");
 const complaintAndGrievance = require("../src/models/complaintAndGrievance");
+const complaintAndSuggestionAdminSchema = require("../src/models/complaintAndGrievance");
+
 const RegisteredUser = require("../src/models/userSchema");
 const Reviews = require("../src/models/review");
 const FacultyPublication = require("../src/models/facultyPublication");
@@ -25,6 +27,8 @@ var isLoggedIn = false;
 const multer = require("multer");
 
 var user = new RegisteredUser();
+var complaintAndSuggestionAdmin = new complaintAndSuggestionAdminSchema()
+
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 /*connecting to database*************************/
@@ -249,11 +253,50 @@ app.get("/userReview", (req, res) => {
 app.get("/bookNotFound", (req, res) => {
   res.render("partials/booknotfound.ejs", { User: user, LoggedIn: isLoggedIn });
 });
-app.get("/complaints", (req, res) => {
-  res.render("partials/complaints.ejs", { User: user, LoggedIn: isLoggedIn });
+app.get("/complaintsAdmin", async (req, res) => {
+
+  var complaintList = new Array();
+  complaintList = await complaintAndSuggestionAdminSchema.find()
+  res.render("partials/Admin/complaint_suggestion.ejs", { User: user, LoggedIn: isLoggedIn,complaintAndSuggestionAdmin:complaintList});
 });
 app.get("/facultypublications", (req, res) => {
   res.render("partials/facultypublications.ejs", {
+    User: user,
+    LoggedIn: isLoggedIn,
+  });
+});
+app.post("/filterTask", async (req, res) => {
+  console.log("here\n");
+  var complaintList = new Array();
+  var type =  req.body.type;
+  var status = req.body.status;
+  var numeric;
+  if(status=="pending")
+  {
+    numeric=0;
+  }
+  else
+  numeric=1;
+  
+  if(type=="default" && status=="default")
+  {
+    complaintList = await complaintAndSuggestionAdminSchema.find();
+  }
+  else if(type=="default")
+  {
+    complaintList = await complaintAndSuggestionAdminSchema.find({status:numeric})
+
+  }
+  else if(status=="default")
+  {
+    complaintList = await complaintAndSuggestionAdminSchema.find({type:type})
+  }
+  else
+  complaintList = await complaintAndSuggestionAdminSchema.find({type:type,status:numeric})
+  res.render("partials/Admin/complaint_suggestion.ejs", { User: user, LoggedIn: isLoggedIn,complaintAndSuggestionAdmin:complaintList});
+});
+app.get("/complaints", (req, res) => {
+  res.render("partials/complaints.ejs", {
     User: user,
     LoggedIn: isLoggedIn,
   });
@@ -318,6 +361,26 @@ app.post("/compliments", async (req, res) => {
     FacultyPublications: fp1,
   });
 });
+app.post("/changeStatusComplaints", async (req, res) => {
+  var status;
+  
+  if(req.body.checkbox)
+  {
+    status = 1;
+  }
+  else
+  status = 0;
+  //console.log("Id is : "+req.body.id)
+  await complaintAndSuggestionAdminSchema.updateOne(
+    
+    {_id:req.body.id},
+    { $set: {status:status}}
+  )
+  var complaintList = new Array();
+  complaintList = await complaintAndSuggestionAdminSchema.find()
+  res.render("partials/Admin/complaint_suggestion.ejs", { User: user, LoggedIn: isLoggedIn,complaintAndSuggestionAdmin:complaintList});
+  
+});
 app.post("/databaseNotFound", async (req, res) => {
   const name = req.body.name;
   const title = req.body.title;
@@ -359,9 +422,13 @@ app.post("/bookNotFound", async (req, res) => {
 app.post("/complaints", async (req, res) => {
   const Name = req.body.inlineRadioOptions;
   const explanation = req.body.explanation;
-  const complaintAndGrievancee = new complaintAndGrievance({
-    Name: Name,
-    explanation: explanation,
+  const type = getType(req);
+  var complaintAndGrievancee = new complaintAndGrievance({
+    explanation:explanation,
+    complaintAndSuggestion:type,
+    status:0,
+    type:type
+
   });
   const cags = await complaintAndGrievancee.save();
   setUser(req);
@@ -510,6 +577,13 @@ function setUser(req) {
     user.Name = "Login/Register";
     //res.render("pages/index.ejs", {User:user,LoggedIn:isLoggedIn});
   }
+}
+function getType(req)
+{
+  if(req.body.inlineRadioOptions=="Suggestions")
+  return "suggestion";
+
+  return "complaint"
 }
 
 // function checkAuthenticated(req,res,next)

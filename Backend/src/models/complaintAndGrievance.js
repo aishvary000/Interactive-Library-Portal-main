@@ -2,9 +2,17 @@ const mongoose = require('mongoose')
 
 const complaintAndGrievanceSchema = new mongoose.Schema({
     
-    Name:{
+    complaintAndSuggestion:{
         type:String,
         required:true
+    },
+    type:{
+        type:String,
+    },
+    status:
+    {
+        type:Number,
+
     },
     explanation:{
         type:String,
