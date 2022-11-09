@@ -188,6 +188,12 @@ app.get("/", async (req, res) => {
 app.get("/uploadPhoto", (req, res) => {
   res.render("pages/uploadphoto.ejs");
 });
+app.get("/currentAwarenessServices",(req,res)=>{
+  res.render("partials/currentAwarenessServices",{ User: user, LoggedIn: isLoggedIn });
+})
+app.get("/circulationService",(req,res)=>{
+  res.render("partials/circulationService",{ User: user, LoggedIn: isLoggedIn });
+})
 app.get("/databaseNotFound", (req, res) => {
   res.render("partials/databasenotfound", { User: user, LoggedIn: isLoggedIn });
 });
@@ -238,6 +244,9 @@ app.get("/collectionExpanded", (req, res) => {
 app.get("/libdatabases", (req, res) => {
   res.render("partials/libdatabases.ejs", { User: user, LoggedIn: isLoggedIn });
 });
+app.get("/openAcessEbooks", (req, res) => {
+  res.render("partials/openAcessEbooks.ejs", { User: user, LoggedIn: isLoggedIn });
+})
 app.get("/askus", (req, res) => {
   res.render("partials/askus.ejs", { User: user, LoggedIn: isLoggedIn });
 });
@@ -488,28 +497,34 @@ app.post("/userReview", uploadUserReviews.single("image"), async (req, res) => {
 //registering user
 app.post("/userRegister", async (req, res) => {
   try {
-    console.log(req.file);
+    //console.log(req.file);
     const password = req.body.password;
     const cpassword = req.body.confirmpassword;
     const username = req.body.username;
     const email = req.body.email;
-    console.log("Email is : " + email);
+    if(password.localeCompare(cpassword) != 0)
+    {
+      //console.log("HERE in mismatch\n")
+      res.render('pages/error.ejs', { err_msg: "Password Mismatch"} );
+    }
+    // console.log("Email is : " + email);
     const user1 = await isValid(email);
+    
     // var img = fs.readFileSync(req.file.path);
     // var encode_img = img.toString('base64');
     // var final_img = {
     //     contentType:req.file.mimetype,
     //     image:new Buffer(encode_img,'base64')
     // };
-    console.log("hello");
+    // console.log("hello");
     if (user1) {
-      console.log("User is present");
+      // console.log("User is present");
       var existingUser = await RegisteredUser.findOne({ Email: email });
       if (existingUser)
         return res
           .status(400)
           .json({ msg: "An account with this email already exists." });
-      console.log("YEPE");
+      // console.log("YEPE");
       const salt = await bcrypt.genSalt();
       const passwordHash = await bcrypt.hash(password, salt);
       const user = new RegisteredUser({

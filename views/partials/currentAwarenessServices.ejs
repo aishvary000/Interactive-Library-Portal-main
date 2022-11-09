@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/headers.ejs') %>
+  <style>
+    ul.b {
+  list-style-type: square;
+}
+
+  </style>
+</head>
+<body>
+    <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
+
+    <hr>
+    <div class="container">
+        <div class="col-md-12 text-center">
+            <br>
+            <h1>Current Awareness Services (CAS)</h1>
+            <br>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <p class="card-text" spacing="50">
+                            (CAS) -Under this, the library offers the
+following services:<br>
+                        </p>
+                          
+
+
+
+                        <ul class="b">
+                            <li>New Arrivals in the Library</li>
+                            <li>News Alerts</li>
+                            <li>Research Highlights</li>
+                          </ul> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</head>
+</body>

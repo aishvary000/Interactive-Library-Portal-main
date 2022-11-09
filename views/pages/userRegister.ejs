@@ -4,7 +4,7 @@
     <%- include('../partials/headers.ejs') %>
 </head>
 <body>
-    <%- include('../partials/navbar.ejs',{LoggedIn:LoggedIn,name:name}) %>
+    <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>>
     <hr>
     <div class="login-form">
         <form action="/userRegister" method="post"

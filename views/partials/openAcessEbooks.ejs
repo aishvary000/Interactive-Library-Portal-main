@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/headers.ejs') %>
+  <style>
+    .hyperLink
+    {
+      cursor:pointer;
+      color:blue
+    }
+    .hyperLink:hover
+    {
+      text-decoration: underline;
+    }
+
+   /* td {
+  width: 200px;
+  border: solid 1px green;
+  height: 100%;
+}
+td a {
+  display: inline-block;
+  height:100%;
+  width:100%;
+}
+td a:hover {
+  background-color: yellow;
+} */
+  </style>
+</head>
+<body>
+  <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
+    
+    <hr>
+    <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        
+                        <p>Provides access to over 2 lakhs full-text e-books through 9 Open Access
+                            databases covering a wide range of subject areas:
+                          </p>
+                          <h5 class="card-title text-center">OPEN ACCESS E-BOOKS</h5>
+                          <table class="table">
+                            <thead class="thead-light">
+                              <tr>
+                                <th scope="col">S.NO</th>
+                                <th scope="col">Open Access Resource</th>
+                                <th scope="col">No of E-books</th>
+                                <th scope="col">Subject Coverage</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td class = "hyperLink" onClick="location.href='http://www.e-booksdirectory.com/';">
+                                    E-Books Directory
+                                    </td>
+                                    <!-- <td><a href="https://www.google.com">Testing</a></td> -->
+                                <td>10,670</td>
+                                <td>All Subjects</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td class = "hyperLink" onClick="location.href='https://www.intechopen.com/books';">
+                                  Intech Open Books
+                                  </td>
+                                  <!-- <td><a href="https://www.google.com">Testing</a></td> -->
+                              <td>6000</td>
+                              <td>All Subjects</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td class = "hyperLink" onClick="location.href='https://open.umn.edu/opentextbooks/';">
+                                  Open Textbook Library
+                                  </td>
+                                  <!-- <td><a href="https://www.google.com">Testing</a></td> -->
+                              <td>1096</td>
+                              <td>All Subjects</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">4</th>
+                                <td class = "hyperLink" onClick="location.href='https://link.springer.com/search?package=openaccess&amp;facet-content-type=%22Book%22&amp;utm_source=springer&amp;utm_medium=referral&amp;utm_content=RMarketing&amp;utm_campaign=BBKK_4_CE02_SpringerOABhometoSL';">
+                                  SpringerOpen
+                                  </td>
+                                  <!-- <td><a href="https://www.google.com">Testing</a></td> -->
+                              <td>2070</td>
+                              <td>Physics</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">5</th>
+                                <td class = "hyperLink" onClick="location.href='https://publishing.cdlib.org/ucpressebooks/search?facet=subject;style=eschol;brand=eschol';">
+                                  California Digital Library eScholarship Editions
+
+eBooks
+                                  </td>
+                                  <!-- <td><a href="https://www.google.com">Testing</a></td> -->
+                              <td>700</td>
+                              <td>Humanities and Social
+                                Sciences</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">6</th>
+                                <td class = "hyperLink" onClick="location.href='https://www.doabooks.org/';">
+                                  Directory of Open Access Books (DOAB)
+                                  </td>
+                                  <!-- <td><a href="https://www.google.com">Testing</a></td> -->
+                              <td>60,500</td>
+                              <td>Humanities and Social
+                                Sciences</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">7</th>
+                                <td class = "hyperLink" onClick="location.href='https://www.gutenberg.org/';">
+                                  Project Gutenberg
+                                  </td>
+                                  <!-- <td><a href="https://www.google.com">Testing</a></td> -->
+                              <td>60,000</td>
+                              <td>Humanities and Social
+                                Sciences</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">8</th>
+                                <td class = "hyperLink" onClick="location.href='https://econpapers.repec.org/';">
+                                  EconPapers – Book Chapters
+                                  </td>
+                                  <!-- <td><a href="https://www.google.com">Testing</a></td> -->
+                              <td>57,612</td>
+                              <td>Economics and Finance</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">9</th>
+                                <td class = "hyperLink" onClick="location.href='https://openknowledge.worldbank.org/handle/10986/4';">
+                                  Open Knowledge Repository (OKR) World Bank
+                                  </td>
+                                  <!-- <td><a href="https://www.google.com">Testing</a></td> -->
+                              <td>2672</td>
+                              <td>Economics and Finance</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>
