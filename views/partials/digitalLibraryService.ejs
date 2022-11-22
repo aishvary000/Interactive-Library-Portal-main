@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/headers.ejs') %>
+</head>
+<body>
+  <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
+    
+    <hr>
+    <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Digital Library Service</h5>
+                        <p>The first floor of the library consists of a Digital Library where users can access subscribed e-
+                            resources and read / download articles or book chapters from e-journals, e- Magazines, e-
+                            books, conference proceedings etc. There are 10 computers in the digital library to access
+                            these resources.
+                          </p>
+                        <p>
+                            The link below gives access to the subscribed e-sources<br>
+                            <div ><a href="https://whispering-thicket-83054.herokuapp.com/libdatabases" class="btn btn-primary">E-resources</a></div>
+                        </p>
+                        <p>
+                            <h3>
+                                Remote access to digital content
+                            </h3>
+                            If anyone wishes to access these databases remotely from anywhere, follow the link below:<br>
+                            <div ><a href="https://idp.lnmiit.ac.in/" class="btn btn-primary">Click Here</a></div>
+
+                        </p>
+                        <p>
+                            <h3>Guidelines to adhere the subscribed resources</h3>
+                            <div ><a href="https://www.lnmiit.ac.in/Library/Guidelines%20for%20Fair%20Use%20of%20e-Resources.pdf" class="btn btn-primary">Guidelines</a></div>
+                        </p> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

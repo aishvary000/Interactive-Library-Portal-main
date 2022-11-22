@@ -203,6 +203,24 @@ app.get("/researchTools", (req, res) => {
     LoggedIn: isLoggedIn,
   });
 });
+app.get("/digitalLibraryService", (req, res) => {
+  res.render("partials/digitalLibraryService", {
+    User: user,
+    LoggedIn: isLoggedIn,
+  });
+});
+app.get("/referenceService", (req, res) => {
+  res.render("partials/referenceServices", {
+    User: user,
+    LoggedIn: isLoggedIn,
+  });
+});
+app.get("/libraryTeamMembers", (req, res) => {
+  res.render("partials/libraryTeamMembers", {
+    User: user,
+    LoggedIn: isLoggedIn,
+  });
+});
 app.get("/login", (req, res) => {
   //res.render('../../login.html')
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/headers.ejs') %>
+</head>
+<body>
+  <%- include('../partials/navbar.ejs',{User: User,LoggedIn:LoggedIn}) %>
+    
+    <hr>
+    <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Reference Service</h5>
+                        <p>Under reference service, library handles the queries related to academic, teaching and research
+                            from the user community. Library has the strong relationship with many reputed libraries in the
+                            nation and cater the requirements of users.
+                          </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>
