@@ -1,3 +1,17 @@
+<!-- <script>
+    function reboot() {
+        sessionStorage. clear();
+
+        document.cookie = "1P_JAR=akjdsbJKHdjhbk";
+document.cookie = "CONSENT=YES+IN.en+20170903-09-0";
+var allCookies = document.cookie.split(';');
+for (var i = 0; i < allCookies.length; i++)
+document.cookie = allCookies[i] + "=;expires="
++ new Date(0).toUTCString();
+displayCookies.innerHTML = document.cookie;
+location.reload(); 
+    }   
+</script> -->
 <div class="m-4">
     <nav class="navbar my-nav navbar-expand-lg navbar-light ">
         <div class="container-fluid">
@@ -16,20 +30,48 @@
                     <%- include('../partials/libraryconnect.ejs') %>
                     
                     <%- include('../partials/about.ejs') %>
+                    <!-- ///////////////////////////////////////////////////////////////////////////////// -->
                     
                   </ul>
+                  <!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
                   </div>
                 <div class="navbar-nav ms-auto">
                    
-                      
-                    <a href = "/login" onclick="return isUserPresent()" class="nav-item nav-link"><%= User.Name %></a>     
+                   
+                    
+                    <% if(LoggedIn){ %>
+                        <!-- <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle"  style="color:black;background-color: white;border-color: white;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= User.Name %>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <li><a class="dropdown-item" href="#" style="color:black">Action</a></li>
+                              <li><a class="dropdown-item" href="#" style="color:black">Another action</a></li>
+                              <li><a class="dropdown-item" href="#" style="color:black">Something else here</a></li>
+                            </ul>
+                          </div> -->
+                        <div class="navbar-nav">
+                            <ul class="exo-menu">
+                            <li class="drop-down nav-item nav-link"><a href="#"><%= User.Name %></a>
+                                <ul class="drop-down-ul animated fadeIn">
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="/logout">Logout</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </div>
+                      <% } else{ %>  
+                        <a href = "/login"  class="nav-item nav-link">Login/Register</a>
+                     <% } %>
+                    <!-- <a href = "/login" onclick="return isUserPresent()" class="nav-item nav-link" id="laura"><%= User.Name %></a>     
                     <script type  = "text/javascript">
                         function isUserPresent () {
                             var parsed_data = '<%- JSON.stringify(LoggedIn) %>' 
                             console.log(parsed_data)
                             if(parsed_data.localeCompare("true") == 0)
                             {
-                                console.log("looged in")
+                                var booba = document.getElementById("booba");
+                                document.getElementById("laura").value = booba.options[booba.selectedIndex].text;
                                 return false;
                             }
                             return true;
@@ -37,19 +79,13 @@
                             //return false;
                             // return true or false, depending on whether you want to allow the `href` property to follow through or not
                         }
-                    </script>
+                    </script> -->
+                  
                    
-                    <div class="btn-group" id="userMenu" style="display: none;">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          UserName <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a id="userProfile" href="#">User Profile</a></li>
-                          <li><a id="logOut" href="#">Logout</a></li>
-                        </ul>
-                      </div>
+    
                 </div>
             </div>
         </div>
     </nav>
 </div>
+

@@ -141,6 +141,7 @@ app.listen(PORT, () => {
 /**...................................................... */
 app.get("/", async (req, res) => {
   var facultyPublications = new Array();
+  console.log("Inside with : "+isLoggedIn);
   if (req.isAuthenticated) {
     var toDisplay = "";
     facultyPublications = await FacultyPublication.find()
@@ -188,6 +189,12 @@ app.get("/", async (req, res) => {
 app.get("/uploadPhoto", (req, res) => {
   res.render("pages/uploadphoto.ejs");
 });
+app.get("/logout",(req,res)=>{
+  req.logOut();
+  isLoggedIn=false;
+  var facultyPublications = new Array();
+  res.render("pages/index.ejs",{User:user,LoggedIn:false, FacultyPublications: facultyPublications})
+})
 app.get("/currentAwarenessServices",(req,res)=>{
   res.render("partials/currentAwarenessServices",{ User: user, LoggedIn: isLoggedIn });
 })
@@ -226,6 +233,7 @@ app.get("/login", (req, res) => {
 
   console.log("Getting here i am lgin");
   //console.log("hello " +userName)
+  
   res.render("pages/login.ejs", { User: user, LoggedIn: isLoggedIn });
 
   // nextTick()
@@ -280,11 +288,17 @@ app.get("/userReview", (req, res) => {
 app.get("/bookNotFound", (req, res) => {
   res.render("partials/booknotfound.ejs", { User: user, LoggedIn: isLoggedIn });
 });
-app.get("/complaintsAdmin", async (req, res) => {
+app.get("/complaints", async (req, res) => {
 
-  var complaintList = new Array();
-  complaintList = await complaintAndSuggestionAdminSchema.find()
-  res.render("partials/Admin/complaint_suggestion.ejs", { User: user, LoggedIn: isLoggedIn,complaintAndSuggestionAdmin:complaintList});
+    if(isLoggedIn && user.Type=="Admin")
+    {
+      var complaintList = new Array();
+      complaintList = await complaintAndSuggestionAdminSchema.find()
+      res.render("partials/Admin/complaint_suggestion.ejs", { User: user, LoggedIn: isLoggedIn,complaintAndSuggestionAdmin:complaintList});
+    }
+    else
+    res.render("partials/complaints.ejs",{User: user, LoggedIn: isLoggedIn});
+ 
 });
 app.get("/facultypublications", (req, res) => {
   res.render("partials/facultypublications.ejs", {
@@ -520,6 +534,7 @@ app.post("/userRegister", async (req, res) => {
     const cpassword = req.body.confirmpassword;
     const username = req.body.username;
     const email = req.body.email;
+
     if(password.localeCompare(cpassword) != 0)
     {
       //console.log("HERE in mismatch\n")
@@ -545,14 +560,20 @@ app.post("/userRegister", async (req, res) => {
       // console.log("YEPE");
       const salt = await bcrypt.genSalt();
       const passwordHash = await bcrypt.hash(password, salt);
-      const user = new RegisteredUser({
+      var toSave = new RegisteredUser({
         Email: email,
         Password: passwordHash,
         Name: username,
-        Type: "Student",
+        Type:"Student"
+       
         //Image:final_img
       });
-      const registeredUser = await user.save();
+      if(isLoggedIn && user.Type == "Admin")
+      {
+          toSave.Type = "Admin"
+      }
+
+      const registeredUser = await toSave.save();
 
       res.render("pages/login.ejs", { User: user, LoggedIn: isLoggedIn });
       // } else {
