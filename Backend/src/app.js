@@ -141,17 +141,17 @@ app.listen(PORT, () => {
 /**...................................................... */
 app.get("/", async (req, res) => {
   var facultyPublications = new Array();
-  console.log("Inside with : "+isLoggedIn);
+  //console.log("Inside with : "+isLoggedIn);
   if (req.isAuthenticated) {
-    var toDisplay = "";
+    //var toDisplay = "";
     facultyPublications = await FacultyPublication.find()
       .sort({ created_at: -1 })
       .limit(4);
 
-    console.log("Fine");
+   // console.log("Fine");
     if (req.user != null) {
       user = req.user[0];
-      console.log(facultyPublications);
+      //console.log(facultyPublications);
       userName = "Welcome, " + req.user[0].Name + " !";
       isLoggedIn = true;
       //FacultyPublications = getFacultyPublications()
